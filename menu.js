@@ -19,6 +19,7 @@ Menu = function () {
     }
 
     if (this._overlayMenuIsOpened()) {
+      var $exportJSONLink = $('a.js-export-json');
       this._addExportToExcelOption($exportJSONLink);
     }
   }
