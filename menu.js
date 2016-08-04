@@ -2,7 +2,7 @@ Menu = function () {
 
   this.init = function () {
     this._bindMenuOpenedListener();
-  }
+  };
 
   this._bindMenuOpenedListener = function () {
     var printAndExportSelector = ".js-share";
@@ -13,15 +13,12 @@ Menu = function () {
   };
 
   this._addExcelExportLink = function () {
-    var $exportJSONLink = $('a.js-export-json');
-
-    // See if our Export Excel is already there
-    if ($('.pop-over-list').find('.js-export-excel').length) {
+    if (this._optionAlreadyExist()) {
       clearInterval(this._addInterval);
       return;
     }
 
-    // The new link/button
+    var $exportJSONLink = $('a.js-export-json');
     if ($exportJSONLink.length) {
       var $excel_btn = $('<a>')
           .attr({
@@ -36,5 +33,9 @@ Menu = function () {
           .wrap(document.createElement("li"));
     }
   }
+
+  this._optionAlreadyExist = function () {
+    return $('.pop-over-list').find('.js-export-excel').length;
+  };
 
 };
