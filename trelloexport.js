@@ -21,8 +21,6 @@ window.URL = window.webkitURL || window.URL;
 
 function createExcelExport() {
   "use strict";
-  // RegEx to find the points for users of TrelloScrum
-  var pointReg = /[\(](\x3f|\d*\.?\d+)([\)])\s?/m;
 
   var boardExportURL = $('a.js-export-json').attr('href');
   //RegEx to extract Board ID
@@ -50,9 +48,7 @@ function createExcelExport() {
         // Setup the active list and cart worksheet
         w              = file.worksheets[0],
         wArchived      = file.worksheets[1],
-        blob,
-        board_title,
-        columnHeadings = ['List', 'Title', 'Description', 'Points', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+        columnHeadings = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
 
     w.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
     w.data    = [];
@@ -80,8 +76,6 @@ function createExcelExport() {
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
           var title          = card.name,
-              parsed         = title.match(pointReg),
-              points         = parsed ? parsed[1] : '',
               due            = card.due || '',
               memberIDs,
               memberInitials = [],
@@ -90,8 +84,6 @@ function createExcelExport() {
               rowData        = [],
               rArch,
               r;
-
-          title = title.replace(pointReg, '');
 
           // tag archived cards
           if (card.closed) {
@@ -126,7 +118,6 @@ function createExcelExport() {
             listName,
             title,
             card.desc,
-            points,
             due,
             memberInitials.toString(),
             labels.toString(),
@@ -160,17 +151,16 @@ function createExcelExport() {
     }
 
     // create blob and save it using FileSaver.js
-    blob        = new Blob([ia], {
+    var blob        = new Blob([ia], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
-    board_title = data.name;
+    var board_title = data.name;
     saveAs(blob, board_title + '.xlsx');
     $("a.pop-over-header-close-btn")[0].click();
 
 
   });
 }
-
 
 
 // on DOM load
