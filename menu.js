@@ -15,8 +15,7 @@ Menu = function () {
   this._addExcelExportLink = function () {
     var $exportJSONLink = $('a.js-export-json');
 
-    // See if our Export Excel is already there
-    if ($('.pop-over-list').find('.js-export-excel').length) {
+    if (this._optionAlreadyExist()) {
       clearInterval(this._addInterval);
       return;
     }
@@ -36,5 +35,9 @@ Menu = function () {
           .wrap(document.createElement("li"));
     }
   }
+
+  this._optionAlreadyExist = function () {
+    return $('.pop-over-list').find('.js-export-excel').length;
+  };
 
 };
