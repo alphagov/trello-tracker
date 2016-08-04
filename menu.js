@@ -2,7 +2,7 @@ Menu = function () {
 
   this.init = function () {
     this._bindMenuOpenedListener();
-  }
+  };
 
   this._bindMenuOpenedListener = function () {
     var printAndExportSelector = ".js-share";
@@ -13,14 +13,12 @@ Menu = function () {
   };
 
   this._addExcelExportLink = function () {
-    var $exportJSONLink = $('a.js-export-json');
-
     if (this._optionAlreadyExist()) {
       clearInterval(this._addInterval);
       return;
     }
 
-    // The new link/button
+    var $exportJSONLink = $('a.js-export-json');
     if ($exportJSONLink.length) {
       var $excel_btn = $('<a>')
           .attr({
