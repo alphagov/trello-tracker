@@ -24,15 +24,19 @@ Menu = function () {
   }
 
   this._addExportToExcelOption = function ($exportJSONLink) {
-    var $excel_btn = $('<a>')
+    var $excel_btn = this._createExportExcelOption($exportJSONLink);
+    $excel_btn.click(createExcelExport);
+  };
+
+  this._createExportExcelOption = function ($exportJSONLink) {
+    return $('<a>')
         .attr({
           'class': 'js-export-excel',
           'href': '#',
           'target': '_blank',
           'title': 'Open downloaded file with Excel8'
-        });
-    $excel_btn.text('Export Excel')
-        .click(createExcelExport)
+        })
+        .text('Export Excel')
         .insertAfter($exportJSONLink.parent())
         .wrap(document.createElement("li"));
   };
