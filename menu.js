@@ -5,12 +5,12 @@ Menu = function () {
     // Look for clicks on the .js-share class, which is
     // the "Share, Print, Export..." link on the board header option list
     $(document).on('mouseup', ".js-share", function () {
-      addInterval = setInterval(addExportLink, 500);
+      addInterval = setInterval(_addExportLink, 500);
     });
   }
 
   // Add a Export Excel button to the DOM and trigger export if clicked
-  function addExportLink() {
+  function _addExportLink() {
     "use strict";
     //alert('add');
 
