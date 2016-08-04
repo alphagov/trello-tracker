@@ -19,8 +19,7 @@ var $,
 
 
 // Variables
-var $excel_btn,
-    addInterval;
+var addInterval;
 
 window.URL = window.webkitURL || window.URL;
 
@@ -43,7 +42,7 @@ function createExcelExport() {
 
   $.getJSON(apiURL, function (data) {
 
-    var file      = {
+    var file           = {
           worksheets: [[], []], // worksheets has one empty worksheet (array)
           creator: 'TrelloExport',
           created: new Date(),
@@ -53,8 +52,8 @@ function createExcelExport() {
         },
 
         // Setup the active list and cart worksheet
-        w         = file.worksheets[0],
-        wArchived = file.worksheets[1],
+        w              = file.worksheets[0],
+        wArchived      = file.worksheets[1],
         buffer,
         i,
         ia,
@@ -196,14 +195,14 @@ function addExportLink() {
 
   // The new link/button
   if ($js_btn.length) {
-    $excel_btn = $('<a>')
+    var $excel_btn = $('<a>')
         .attr({
           'class': 'js-export-excel',
           'href': '#',
           'target': '_blank',
           'title': 'Open downloaded file with Excel'
-        })
-        .text('Export Excel')
+        });
+    $excel_btn.text('Export Excel')
         .click(createExcelExport)
         .insertAfter($js_btn.parent())
         .wrap(document.createElement("li"));
