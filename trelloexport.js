@@ -52,7 +52,6 @@ function createExcelExport() {
         w              = file.worksheets[0],
         wArchived      = file.worksheets[1],
         buffer,
-        i,
         ia,
         blob,
         board_title,
@@ -159,7 +158,7 @@ function createExcelExport() {
     ia         = new Uint8Array(buffer);
 
     // write the bytes of the string to an ArrayBuffer
-    for (i = 0; i < byteString.length; i += 1) {
+    for (var i = 0; i < byteString.length; i += 1) {
       ia[i] = byteString.charCodeAt(i);
     }
 
