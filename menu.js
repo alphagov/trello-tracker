@@ -1,18 +1,19 @@
 Menu = function () {
 
   this.init = function () {
-    var printAndExportSelector = ".js-share";
-    $(document).on('mouseup', printAndExportSelector, function () {
-      this._addInterval = setInterval(_addExportLink, 500);
-    });
+    this._bindMenuOpenedListener();
   }
 
-  // Add a Export Excel button to the DOM and trigger export if clicked
-  function _addExportLink() {
-    "use strict";
-    //alert('add');
+  this._bindMenuOpenedListener = function () {
+    var printAndExportSelector = ".js-share";
+    var self = this;
+    $(document).on('mouseup', printAndExportSelector, function () {
+      self._addInterval = setInterval(self._addExcelExportLink.bind(self), 500);
+    });
+  };
 
-    var $js_btn = $('a.js-export-json'); // Export JSON link
+  this._addExcelExportLink = function () {
+    var $exportJSONLink = $('a.js-export-json');
 
     // See if our Export Excel is already there
     if ($('.pop-over-list').find('.js-export-excel').length) {
@@ -21,7 +22,7 @@ Menu = function () {
     }
 
     // The new link/button
-    if ($js_btn.length) {
+    if ($exportJSONLink.length) {
       var $excel_btn = $('<a>')
           .attr({
             'class': 'js-export-excel',
@@ -31,7 +32,7 @@ Menu = function () {
           });
       $excel_btn.text('Export Excel')
           .click(createExcelExport)
-          .insertAfter($js_btn.parent())
+          .insertAfter($exportJSONLink.parent())
           .wrap(document.createElement("li"));
     }
   }
