@@ -1,11 +1,10 @@
 Menu = function () {
-  var addInterval;
 
   this.init = function () {
     // Look for clicks on the .js-share class, which is
     // the "Share, Print, Export..." link on the board header option list
     $(document).on('mouseup', ".js-share", function () {
-      addInterval = setInterval(_addExportLink, 500);
+      this.addInterval = setInterval(_addExportLink, 500);
     });
   }
 
@@ -18,7 +17,7 @@ Menu = function () {
 
     // See if our Export Excel is already there
     if ($('.pop-over-list').find('.js-export-excel').length) {
-      clearInterval(addInterval);
+      clearInterval(this.addInterval);
       return;
     }
 
