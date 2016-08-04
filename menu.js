@@ -1,9 +1,8 @@
 Menu = function () {
 
   this.init = function () {
-    // Look for clicks on the .js-share class, which is
-    // the "Share, Print, Export..." link on the board header option list
-    $(document).on('mouseup', ".js-share", function () {
+    var printAndExportSelector = ".js-share";
+    $(document).on('mouseup', printAndExportSelector, function () {
       this._addInterval = setInterval(_addExportLink, 500);
     });
   }
@@ -36,6 +35,5 @@ Menu = function () {
           .wrap(document.createElement("li"));
     }
   }
-
 
 };
