@@ -13,6 +13,7 @@
                    "lib/FileSaver.js",
                    "lib/xlsx.js",
                    "lib/jszip.min.js",
+                   "menu.js",
                    "trelloexport.js"]
 		}
 	],
