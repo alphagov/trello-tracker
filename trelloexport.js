@@ -10,7 +10,6 @@
 
 // Globals
 var $,
-    byteString,
     xlsx,
     ArrayBuffer,
     Uint8Array,
@@ -153,9 +152,9 @@ function createExcelExport() {
 
     // We want just the base64 part of the output of xlsx.js
     // since we are not leveraging they standard transfer process.
-    byteString = window.atob(xlsx(file).base64);
     buffer     = new ArrayBuffer(byteString.length);
     ia         = new Uint8Array(buffer);
+    var byteString = window.atob(xlsx(file).base64);
 
     // write the bytes of the string to an ArrayBuffer
     for (var i = 0; i < byteString.length; i += 1) {
