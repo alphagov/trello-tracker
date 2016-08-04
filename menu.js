@@ -13,14 +13,12 @@ Menu = function () {
   };
 
   this._addExcelExportLink = function () {
-
     if (this._optionAlreadyExist()) {
       clearInterval(this._addInterval);
       return;
     }
 
-    var $exportJSONLink = $('a.js-export-json');
-    if ($exportJSONLink.length) {
+    if (this._overlayMenuIsOpened()) {
       this._addExportToExcelOption($exportJSONLink);
     }
   }
@@ -37,6 +35,11 @@ Menu = function () {
         .click(createExcelExport)
         .insertAfter($exportJSONLink.parent())
         .wrap(document.createElement("li"));
+  };
+
+  this._overlayMenuIsOpened = function () {
+    var $exportJSONLink = $('a.js-export-json');
+    return $exportJSONLink.length;
   };
 
   this._optionAlreadyExist = function () {
