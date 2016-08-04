@@ -1,6 +1,14 @@
 Menu = function () {
   var addInterval;
 
+  this.init = function () {
+    // Look for clicks on the .js-share class, which is
+    // the "Share, Print, Export..." link on the board header option list
+    $(document).on('mouseup', ".js-share", function () {
+      addInterval = setInterval(addExportLink, 500);
+    });
+  }
+
   // Add a Export Excel button to the DOM and trigger export if clicked
   function addExportLink() {
     "use strict";
@@ -30,12 +38,5 @@ Menu = function () {
     }
   }
 
-  this.init = function () {
-    // Look for clicks on the .js-share class, which is
-    // the "Share, Print, Export..." link on the board header option list
-    $(document).on('mouseup', ".js-share", function () {
-      addInterval = setInterval(addExportLink, 500);
-    });
-  }
 
 };
