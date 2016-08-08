@@ -99,10 +99,8 @@ function createExcelExport() {
           ];
 
           // Writes all closed items to the Archived tab
-          var rowNumber;
           if (!list.closed && !card.closed) {
-            rowNumber         = worksheet.data.push([]) - 1;
-            worksheet.data[rowNumber] = rowData;
+            worksheet.data.push(rowData)
           }
         }
       });
