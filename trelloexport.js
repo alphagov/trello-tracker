@@ -44,12 +44,13 @@ function createExcelExport() {
           modified: new Date(),
           activeWorksheet: 0
         },
-        w    = file.worksheets[0];
 
-    w.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-    w.data    = [];
-    w.data.push([]);
-    w.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+
+    worksheet = file.worksheets[0];
+    worksheet.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
+    worksheet.data    = [];
+    worksheet.data.push([]);
+    worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {
@@ -100,8 +101,8 @@ function createExcelExport() {
           // Writes all closed items to the Archived tab
           var rowNumber;
           if (!list.closed && !card.closed) {
-            rowNumber         = w.data.push([]) - 1;
-            w.data[rowNumber] = rowData;
+            rowNumber         = worksheet.data.push([]) - 1;
+            worksheet.data[rowNumber] = rowData;
           }
         }
       });
