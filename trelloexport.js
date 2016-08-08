@@ -37,7 +37,7 @@ function createExcelExport() {
   $.getJSON(apiURL, function (data) {
 
     var file           = {
-          worksheets: [[], []], // worksheets has one empty worksheet (array)
+          worksheets: [[]], // worksheets has one empty worksheet (array)
           creator: 'TrelloExport',
           created: new Date(),
           lastModifiedBy: 'TrelloExport',
@@ -47,20 +47,12 @@ function createExcelExport() {
 
         // Setup the active list and cart worksheet
         w              = file.worksheets[0],
-        wArchived      = file.worksheets[1],
         columnHeadings = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
 
     w.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
     w.data    = [];
     w.data.push([]);
     w.data[0] = columnHeadings;
-
-
-    // Setup the archive list and cart worksheet
-    wArchived.name    = 'Archived ' + data.name.substring(0, 22);
-    wArchived.data    = [];
-    wArchived.data.push([]);
-    wArchived.data[0] = columnHeadings;
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {
@@ -90,6 +82,7 @@ function createExcelExport() {
 
           });
 
+
           // Need to set dates to the Date type so xlsx.js sets the right datatype
           var due = card.due || '';
           if (due !== '') {
@@ -108,13 +101,8 @@ function createExcelExport() {
           ];
 
           // Writes all closed items to the Archived tab
-          // Note: Trello allows open cards on closed lists
-          var rowNumberArch,
-              rowNumber;
-          if (list.closed || card.closed) {
-            rowNumberArch                 = wArchived.data.push([]) - 1;
-            wArchived.data[rowNumberArch] = rowData;
-          } else {
+          var rowNumber;
+          if (!list.closed && !card.closed) {
             rowNumber         = w.data.push([]) - 1;
             w.data[rowNumber] = rowData;
           }
