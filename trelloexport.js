@@ -77,7 +77,6 @@ function createExcelExport() {
         if (card.idList === list_id) {
           var title          = card.name,
               due            = card.due || '',
-              memberInitials = [],
               labels         = [],
               d              = new Date(due),
               rowData        = [],
@@ -90,6 +89,7 @@ function createExcelExport() {
           }
 
           var memberIDs      = card.idMembers;
+          var memberInitials = [];
           $.each(memberIDs, function (i, memberID) {
             $.each(data.members, function (key, member) {
               if (member.id === memberID) {
