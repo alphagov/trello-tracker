@@ -36,7 +36,7 @@ function createExcelExport() {
 
   $.getJSON(apiURL, function (data) {
 
-    var file           = {
+    var file = {
           worksheets: [[]], // worksheets has one empty worksheet (array)
           creator: 'TrelloExport',
           created: new Date(),
@@ -44,19 +44,16 @@ function createExcelExport() {
           modified: new Date(),
           activeWorksheet: 0
         },
-
-        // Setup the active list and cart worksheet
-        w              = file.worksheets[0],
-        columnHeadings = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+        w    = file.worksheets[0];
 
     w.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
     w.data    = [];
     w.data.push([]);
-    w.data[0] = columnHeadings;
+    w.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {
-      var list_id  = list.id;
+      var list_id = list.id;
 
       // Iterate through each card and transform data as needed
       $.each(data.cards, function (i, card) {
