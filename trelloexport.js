@@ -21,6 +21,7 @@ function createExcelExport() {
     spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
 
     // Iterate through each card and transform data as needed
+    var rows = [];
     $.each(data.cards, function (i, card) {
 
       var labels = [];
@@ -30,9 +31,7 @@ function createExcelExport() {
         } else {
           labels.push(label.color);
         }
-
       });
-
 
       // Need to set dates to the Date type so xlsx.js sets the right datatype
       var due = card.due || '';
@@ -51,9 +50,11 @@ function createExcelExport() {
 
       // Writes all closed items to the Archived tab
       if (!card.closed) {
-        spreadSheet.addRow(rowData);
+        rows.push(rowData);
       }
     });
+
+    spreadSheet.addRows(rows);
 
     spreadSheet.export();
     $("a.pop-over-header-close-btn")[0].click();

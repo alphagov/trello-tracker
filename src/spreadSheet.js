@@ -9,6 +9,13 @@ SpreadSheet = function (boardTitle) {
     activeWorksheet: 0
   };
 
+  this.addRows = function (rows) {
+    var self = this;
+    $.each(rows, function (i, row) {
+      self.addRow(row);
+    });
+  };
+
   this.addRow = function (rowData) {
     worksheet.data.push(rowData);
   };
