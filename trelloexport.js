@@ -64,13 +64,7 @@ function createExcelExport() {
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {
-      var list_id  = list.id,
-          listName = list.name;
-
-      // tag archived lists
-      if (list.closed) {
-        listName = '[archived] ' + listName;
-      }
+      var list_id  = list.id;
 
       // Iterate through each card and transform data as needed
       $.each(data.cards, function (i, card) {
@@ -103,7 +97,7 @@ function createExcelExport() {
           }
 
           var rowData = [
-            listName,
+            list.name,
             card.name,
             card.desc,
             due,
