@@ -37,6 +37,7 @@ function createExcelExport() {
   $.getJSON(apiURL, function (data) {
 
     var spreadSheet = new SpreadSheet(data.name);
+    spreadSheet.addHeader(['List', 'Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {

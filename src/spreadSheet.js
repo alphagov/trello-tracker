@@ -13,6 +13,10 @@ SpreadSheet = function (boardTitle) {
     worksheet.data.push(rowData);
   };
 
+  this.addHeader = function (header) {
+    worksheet.data[0] = header;
+  };
+
   this.export = function () {
     // We want just the base64 part of the output of xlsx.js
     // since we are not leveraging they standard transfer process.
@@ -34,8 +38,7 @@ SpreadSheet = function (boardTitle) {
 
   var worksheet  = this.file.worksheets[0];
   worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-  worksheet.data    = [];
+  worksheet.data = [];
   worksheet.data.push([]);
-  worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL'];
 };
 
