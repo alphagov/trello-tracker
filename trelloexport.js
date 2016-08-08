@@ -1,22 +1,3 @@
-/*!
- * TrelloExport
- * https://github.com/llad/export-for-trello
- *
- * Credit:
- * Started from: https://github.com/Q42/TrelloScrum
- */
-
-/*jslint browser: true, devel: false*/
-
-// Globals
-var $,
-    xlsx,
-    ArrayBuffer,
-    Uint8Array,
-    Blob,
-    saveAs;
-
-
 window.URL = window.webkitURL || window.URL;
 
 function createExcelExport() {
