@@ -75,9 +75,7 @@ function createExcelExport() {
       // Iterate through each card and transform data as needed
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
-          var title = card.name,
-              rowNumberArch,
-              rowNumber;
+          var title = card.name;
 
           // tag archived cards
           if (card.closed) {
@@ -123,6 +121,8 @@ function createExcelExport() {
 
           // Writes all closed items to the Archived tab
           // Note: Trello allows open cards on closed lists
+          var rowNumberArch,
+              rowNumber;
           if (list.closed || card.closed) {
             rowNumberArch                 = wArchived.data.push([]) - 1;
             wArchived.data[rowNumberArch] = rowData;
