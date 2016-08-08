@@ -77,7 +77,6 @@ function createExcelExport() {
         if (card.idList === list_id) {
           var title          = card.name,
               due            = card.due || '',
-              labels         = [],
               d              = new Date(due),
               rowData        = [],
               rArch,
@@ -98,7 +97,7 @@ function createExcelExport() {
             });
           });
 
-          //Get all labels
+          var labels = [];
           $.each(card.labels, function (i, label) {
             if (label.name) {
               labels.push(label.name);
