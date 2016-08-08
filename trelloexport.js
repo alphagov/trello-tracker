@@ -76,9 +76,8 @@ function createExcelExport() {
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
           var title = card.name,
-              due   = card.due || '',
-              rArch,
-              r;
+              rowNumberArch,
+              rowNumber;
 
           // tag archived cards
           if (card.closed) {
@@ -125,12 +124,11 @@ function createExcelExport() {
           // Writes all closed items to the Archived tab
           // Note: Trello allows open cards on closed lists
           if (list.closed || card.closed) {
-            rArch                 = wArchived.data.push([]) - 1;
-            wArchived.data[rArch] = rowData;
-
+            rowNumberArch                 = wArchived.data.push([]) - 1;
+            wArchived.data[rowNumberArch] = rowData;
           } else {
-            r         = w.data.push([]) - 1;
-            w.data[r] = rowData;
+            rowNumber         = w.data.push([]) - 1;
+            w.data[rowNumber] = rowData;
           }
         }
       });
