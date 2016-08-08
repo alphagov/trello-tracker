@@ -92,7 +92,7 @@ function createExcelExport() {
       });
     });
 
-    new Excel().export(spreadSheet.file, data.name);
+    spreadSheet.export();
     $("a.pop-over-header-close-btn")[0].click();
   });
 }
