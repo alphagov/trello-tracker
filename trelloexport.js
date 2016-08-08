@@ -75,9 +75,7 @@ function createExcelExport() {
       // Iterate through each card and transform data as needed
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
-          var title          = card.name,
-              due            = card.due || '',
-              d              = new Date(due),
+          var title = card.name,
               rArch,
               r;
 
@@ -107,8 +105,9 @@ function createExcelExport() {
           });
 
           // Need to set dates to the Date type so xlsx.js sets the right datatype
+          var due = card.due || '';
           if (due !== '') {
-            due = d;
+            due = new Date(due);
           }
 
           var rowData = [
