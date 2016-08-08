@@ -20,3 +20,27 @@ Excel = function () {
   }
 
 };
+
+SpreadSheet = function (name) {
+
+  this.file = {
+    worksheets: [[]], // worksheets has one empty worksheet (array)
+    creator: 'TrelloExport',
+    created: new Date(),
+    lastModifiedBy: 'TrelloExport',
+    modified: new Date(),
+    activeWorksheet: 0
+  };
+
+  this.addRow = function (rowData) {
+    worksheet.data.push(rowData);
+  };
+
+  var worksheet  = this.file.worksheets[0];
+  worksheet.name = name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
+  worksheet.data    = [];
+  worksheet.data.push([]);
+  worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+
+};
+

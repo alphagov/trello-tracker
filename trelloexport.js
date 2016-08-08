@@ -36,21 +36,7 @@ function createExcelExport() {
 
   $.getJSON(apiURL, function (data) {
 
-    var file = {
-          worksheets: [[]], // worksheets has one empty worksheet (array)
-          creator: 'TrelloExport',
-          created: new Date(),
-          lastModifiedBy: 'TrelloExport',
-          modified: new Date(),
-          activeWorksheet: 0
-        },
-
-
-    worksheet = file.worksheets[0];
-    worksheet.name = data.name.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-    worksheet.data    = [];
-    worksheet.data.push([]);
-    worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+    var spreadSheet = new SpreadSheet(data.name);
 
     // This iterates through each list and builds the dataset
     $.each(data.lists, function (key, list) {
@@ -100,13 +86,13 @@ function createExcelExport() {
 
           // Writes all closed items to the Archived tab
           if (!list.closed && !card.closed) {
-            worksheet.data.push(rowData)
+            spreadSheet.addRow(rowData);
           }
         }
       });
     });
 
-    new Excel().export(file, data.name);
+    new Excel().export(spreadSheet.file, data.name);
     $("a.pop-over-header-close-btn")[0].click();
   });
 }
