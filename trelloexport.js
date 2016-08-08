@@ -76,6 +76,7 @@ function createExcelExport() {
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
           var title = card.name,
+              due   = card.due || '',
               rArch,
               r;
 
