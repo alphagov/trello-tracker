@@ -36,6 +36,6 @@ SpreadSheet = function (boardTitle) {
   worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
   worksheet.data    = [];
   worksheet.data.push([]);
-  worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Members', 'Labels', 'Card #', 'Card URL'];
+  worksheet.data[0] = ['List', 'Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL'];
 };
 

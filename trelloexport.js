@@ -46,16 +46,6 @@ function createExcelExport() {
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
 
-          var memberIDs      = card.idMembers;
-          var memberInitials = [];
-          $.each(memberIDs, function (i, memberID) {
-            $.each(data.members, function (key, member) {
-              if (member.id === memberID) {
-                memberInitials.push(member.initials);
-              }
-            });
-          });
-
           var labels = [];
           $.each(card.labels, function (i, label) {
             if (label.name) {
@@ -78,7 +68,6 @@ function createExcelExport() {
             card.name,
             card.desc,
             due,
-            memberInitials.toString(),
             labels.toString(),
             card.idShort,
             card.shortUrl
