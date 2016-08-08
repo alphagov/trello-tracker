@@ -78,7 +78,6 @@ function createExcelExport() {
           var title          = card.name,
               due            = card.due || '',
               d              = new Date(due),
-              rowData        = [],
               rArch,
               r;
 
@@ -112,7 +111,7 @@ function createExcelExport() {
             due = d;
           }
 
-          rowData = [
+          var rowData = [
             listName,
             title,
             card.desc,
