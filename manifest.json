@@ -17,6 +17,7 @@
         "lib/xlsx.js",
         "lib/jszip.min.js",
         "src/menu.js",
+        "src/excel.js",
         "trelloexport.js"
       ]
     }
