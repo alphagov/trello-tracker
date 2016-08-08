@@ -75,12 +75,6 @@ function createExcelExport() {
       // Iterate through each card and transform data as needed
       $.each(data.cards, function (i, card) {
         if (card.idList === list_id) {
-          var title = card.name;
-
-          // tag archived cards
-          if (card.closed) {
-            title = '[archived] ' + title;
-          }
 
           var memberIDs      = card.idMembers;
           var memberInitials = [];
@@ -110,7 +104,7 @@ function createExcelExport() {
 
           var rowData = [
             listName,
-            title,
+            card.name,
             card.desc,
             due,
             memberInitials.toString(),
