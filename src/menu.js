@@ -1,4 +1,4 @@
-Menu = function () {
+Menu = function (config) {
 
   this.init = function () {
     this._bindMenuOpenedListener();
@@ -26,7 +26,9 @@ Menu = function () {
 
   this._addExportToExcelOption = function ($exportJSONLink) {
     var $excel_btn = this._createExportExcelOption($exportJSONLink);
-    $excel_btn.click(createExcelExport);
+    //TODO: remove the explicit binding to the Factcheck report object
+    var report = config.option1;
+    $excel_btn.click($.proxy(report.createExcelReport, report));
   };
 
   this._createExportExcelOption = function ($exportJSONLink) {

@@ -1,14 +1,10 @@
 window.URL = window.webkitURL || window.URL;
 
-function createExcelExport() {
-  "use strict";
-  new Factcheck().createExport();
-}
-
-
-// on DOM load
 $(function () {
   "use strict";
 
-  new Menu().init();
+  var config = {
+    option1: new Factcheck()
+  };
+  new Menu(config).init();
 });
