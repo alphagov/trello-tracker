@@ -2,21 +2,21 @@ Factcheck = function () {
 
   this.createExport = function () {
     var self = this;
-    new TrelloAPI().getAllCards(function (data, listName) {
+    new TrelloAPI().getAllCards(function (cards, listName) {
 
       var spreadSheet = new SpreadSheet(listName);
       spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
 
-      var rows = self.transformRows(data);
+      var rows = self.transformRows(cards);
       spreadSheet.addRows(rows);
 
       spreadSheet.export();
     });
   }
 
-  this.transformRows = function (data) {
+  this.transformRows = function (cards) {
     var rows = [];
-    $.each(data.cards, function (i, card) {
+    $.each(cards, function (i, card) {
 
       var labels = [];
       $.each(card.labels, function (i, label) {
