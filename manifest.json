@@ -18,6 +18,7 @@
         "lib/jszip.min.js",
         "src/menu.js",
         "src/spreadSheet.js",
+        "src/report/factcheck.js",
         "trelloexport.js"
       ]
     }
