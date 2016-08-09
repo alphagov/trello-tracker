@@ -1,6 +1,6 @@
 Factcheck = function () {
 
-  this.createExport = function () {
+  this.createExcelReport = function () {
     var self = this;
     new TrelloAPI().getAllCards(function (cards, listName) {
 
