@@ -37,7 +37,7 @@ Menu = function (config) {
           'class': 'js-export-excel',
           'href': '#',
           'target': '_blank',
-          'title': 'Open downloaded file with Excel9'
+          'title': 'Open downloaded file with Excel0000'
         })
         .text('Export Excel')
         .insertAfter($exportJSONLink.parent())
