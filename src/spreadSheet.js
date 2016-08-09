@@ -12,12 +12,8 @@ SpreadSheet = function (boardTitle) {
   this.addRows = function (rows) {
     var self = this;
     $.each(rows, function (i, row) {
-      self.addRow(row);
+      self._addRow(row);
     });
-  };
-
-  this.addRow = function (rowData) {
-    this.worksheet.data.push(rowData);
   };
 
   this.addHeader = function (header) {
@@ -47,5 +43,9 @@ SpreadSheet = function (boardTitle) {
   this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
   this.worksheet.data = [];
   this.worksheet.data.push([]);
+
+  this._addRow = function (rowData) {
+    this.worksheet.data.push(rowData);
+  };
 };
 
