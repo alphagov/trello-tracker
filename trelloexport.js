@@ -12,9 +12,8 @@ function createExcelExport() {
     spreadSheet.addRows(rows);
 
     spreadSheet.export();
-    $("a.pop-over-header-close-btn")[0].click();
   });
-
+  $("a.pop-over-header-close-btn")[0].click();
 }
 
 
