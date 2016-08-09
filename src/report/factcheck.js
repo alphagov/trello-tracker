@@ -1,6 +1,20 @@
-Factcheck = function (data) {
+Factcheck = function () {
 
-  this.transformRows = function () {
+  this.createExport = function () {
+    var self = this;
+    new TrelloAPI().getAllCards(function (data, listName) {
+
+      var spreadSheet = new SpreadSheet(listName);
+      spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
+
+      var rows = self.transformRows(data);
+      spreadSheet.addRows(rows);
+
+      spreadSheet.export();
+    });
+  }
+
+  this.transformRows = function (data) {
     var rows = [];
     $.each(data.cards, function (i, card) {
 
