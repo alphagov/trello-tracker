@@ -28,7 +28,7 @@ Menu = function (config) {
     var $excel_btn = this._createExportExcelOption($exportJSONLink);
     //TODO: remove the explicit binding to the Factcheck report object
     var report = config.option1;
-    $excel_btn.click($.proxy(report.createExcelReport, report));
+    $excel_btn.click($.proxy(report.toSpreadSheet, report));
   };
 
   this._createExportExcelOption = function ($exportJSONLink) {
