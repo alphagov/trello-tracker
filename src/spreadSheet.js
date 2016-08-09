@@ -17,11 +17,11 @@ SpreadSheet = function (boardTitle) {
   };
 
   this.addRow = function (rowData) {
-    worksheet.data.push(rowData);
+    this.worksheet.data.push(rowData);
   };
 
   this.addHeader = function (header) {
-    worksheet.data[0] = header;
+    this.worksheet.data[0] = header;
   };
 
   this.export = function () {
@@ -43,9 +43,9 @@ SpreadSheet = function (boardTitle) {
     saveAs(blob, boardTitle + '.xlsx');
   }
 
-  var worksheet  = this.file.worksheets[0];
-  worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-  worksheet.data = [];
-  worksheet.data.push([]);
+  this.worksheet      = this.file.worksheets[0];
+  this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
+  this.worksheet.data = [];
+  this.worksheet.data.push([]);
 };
 
