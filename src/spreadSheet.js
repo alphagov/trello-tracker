@@ -2,8 +2,7 @@ SpreadSheet = function (boardTitle) {
 
   this._init = function () {
     this.file = {
-      worksheets: [[]], // worksheets has one empty worksheet (array)
-      worksheets: [[]], 
+      worksheets: [[]],
       creator: 'Trello Tracker',
       created: new Date(),
       lastModifiedBy: 'Trello Tracker',
@@ -11,7 +10,7 @@ SpreadSheet = function (boardTitle) {
       activeWorksheet: 0
     };
 
-    this.worksheet      = this.file.worksheets[0];
+    this.worksheet = this.file.worksheets[0];
     this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
     this.worksheet.data = [];
 
@@ -30,8 +29,8 @@ SpreadSheet = function (boardTitle) {
 
   this.export = function () {
     var byteString = window.atob(xlsx(this.file).base64);
-    var buffer     = new ArrayBuffer(byteString.length);
-    var intArray   = new Uint8Array(buffer);
+    var buffer = new ArrayBuffer(byteString.length);
+    var intArray = new Uint8Array(buffer);
 
     for (var i = 0; i < byteString.length; i += 1) {
       intArray[i] = byteString.charCodeAt(i);
