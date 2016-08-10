@@ -7,14 +7,14 @@ Factcheck = function () {
       var spreadSheet = new SpreadSheet(listName);
       spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
 
-      var rows = self.transformRows(cards);
+      var rows = self._transformRows(cards);
       spreadSheet.addRows(rows);
 
       spreadSheet.export();
     });
   }
 
-  this.transformRows = function (cards) {
+  this._transformRows = function (cards) {
     var rows = [];
     $.each(cards, function (i, card) {
 
