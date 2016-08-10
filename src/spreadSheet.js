@@ -1,12 +1,19 @@
 SpreadSheet = function (boardTitle) {
 
-  this.file = {
-    worksheets: [[]], // worksheets has one empty worksheet (array)
-    creator: 'TrelloExport',
-    created: new Date(),
-    lastModifiedBy: 'TrelloExport',
-    modified: new Date(),
-    activeWorksheet: 0
+  this._init = function () {
+    this.file = {
+      worksheets: [[]], // worksheets has one empty worksheet (array)
+      creator: 'TrelloExport',
+      created: new Date(),
+      lastModifiedBy: 'TrelloExport',
+      modified: new Date(),
+      activeWorksheet: 0
+    };
+
+    this.worksheet      = this.file.worksheets[0];
+    this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
+    this.worksheet.data = [];
+
   };
 
   this.addRows = function (rows) {
@@ -39,12 +46,9 @@ SpreadSheet = function (boardTitle) {
     saveAs(blob, boardTitle + '.xlsx');
   };
 
-  this.worksheet      = this.file.worksheets[0];
-  this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-  this.worksheet.data = [];
-
   this._addRow = function (rowData) {
     this.worksheet.data.push(rowData);
   };
 
+  this._init();
 };
