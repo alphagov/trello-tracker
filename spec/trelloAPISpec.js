@@ -2,15 +2,13 @@ describe("TrelloAPI", function () {
 
   describe("#getAllCards", function () {
     it("requests cards for the current Trello board", function () {
-      var trelloAPI = new TrelloAPI();
-
       var deferred = $.Deferred();
       deferred.resolve({});
 
       spyOn($, 'ajax').and.returnValue(deferred.promise());
-      spyOn(trelloAPI, 'currentBrowserLocation').and.returnValue('/b/the_board_id/the_board_name');
+      spyOn(TrelloAPI, 'currentBrowserLocation').and.returnValue('/b/the_board_id/the_board_name');
 
-      trelloAPI.getAllCards(function (data) {
+      TrelloAPI.getAllCards(function (data) {
         //noop
       });
 
@@ -19,8 +17,6 @@ describe("TrelloAPI", function () {
     });
 
     it("the callback is being passed the board name", function () {
-      var trelloAPI = new TrelloAPI();
-
       var deferred = $.Deferred();
       var json = {
         name: 'the board name',
@@ -30,7 +26,7 @@ describe("TrelloAPI", function () {
       deferred.resolve(json);
 
       var name;
-      trelloAPI.getAllCards(function (cards, boardName) {
+      TrelloAPI.getAllCards(function (cards, boardName) {
         name = boardName;
       });
 
@@ -38,8 +34,6 @@ describe("TrelloAPI", function () {
     })
 
     it("the callback is being passed all the cards", function () {
-      var trelloAPI = new TrelloAPI();
-
       var deferred = $.Deferred();
       var json = {
         name: '',
@@ -49,7 +43,7 @@ describe("TrelloAPI", function () {
       deferred.resolve(json);
 
       var cards;
-      trelloAPI.getAllCards(function (allCards, boardName) {
+      TrelloAPI.getAllCards(function (allCards, boardName) {
         cards = allCards;
       });
 
