@@ -37,7 +37,7 @@ SpreadSheet = function (boardTitle) {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
     saveAs(blob, boardTitle + '.xlsx');
-  }
+  };
 
   this.worksheet      = this.file.worksheets[0];
   this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
@@ -46,5 +46,5 @@ SpreadSheet = function (boardTitle) {
   this._addRow = function (rowData) {
     this.worksheet.data.push(rowData);
   };
-};
 
+};
