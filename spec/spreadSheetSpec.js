@@ -22,4 +22,28 @@ describe("SpreadSheet", function () {
       expect(spreadSheet.worksheet.data[2]).toEqual(['3','4']);
     })
   })
+
+  describe("#export", function() {
+    it("Saves a new file", function() {
+      var spreadSheet = new SpreadSheet('a title');
+      spreadSheet.addHeader(['header1']);
+      spreadSheet.addRows(['row1']);
+
+      spyOn(window, "saveAs");
+      spreadSheet.export();
+
+      expect(window.saveAs).toHaveBeenCalled();
+    })
+
+    it("Saves a file with the board title as the file name", function() {
+      var spreadSheet = new SpreadSheet("A board title");
+      spreadSheet.addHeader(['header1']);
+      spreadSheet.addRows(['row1']);
+
+      spyOn(window, "saveAs");
+      spreadSheet.export();
+
+      expect(window.saveAs.calls.first().args[1]).toMatch("A board title.xlsx");
+    })
+  })
 });
