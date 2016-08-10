@@ -28,21 +28,18 @@ SpreadSheet = function (boardTitle) {
   };
 
   this.export = function () {
-    // We want just the base64 part of the output of xlsx.js
-    // since we are not leveraging they standard transfer process.
     var byteString = window.atob(xlsx(this.file).base64);
     var buffer     = new ArrayBuffer(byteString.length);
-    var ia         = new Uint8Array(buffer);
+    var intArray   = new Uint8Array(buffer);
 
-    // write the bytes of the string to an ArrayBuffer
     for (var i = 0; i < byteString.length; i += 1) {
-      ia[i] = byteString.charCodeAt(i);
+      intArray[i] = byteString.charCodeAt(i);
     }
 
-    // create blob and save it using FileSaver.js
-    var blob = new Blob([ia], {
+    var blob = new Blob([intArray], {
       type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
     });
+
     saveAs(blob, boardTitle + '.xlsx');
   };
 
