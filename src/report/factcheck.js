@@ -3,16 +3,21 @@ Factcheck = function () {
   this.toSpreadSheet = function () {
     var self = this;
     new TrelloAPI().getAllCards(function (cards, listName) {
-
-      var spreadSheet = new SpreadSheet(listName);
-      spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
-
-      var rows = self._transformRows(cards);
-      spreadSheet.addRows(rows);
+      var spreadSheet = self.process(cards, listName);
 
       spreadSheet.export();
     });
-  }
+  };
+
+  this.process = function (cards, listName) {
+    var spreadSheet = new SpreadSheet(listName);
+    spreadSheet.addHeader(['Title', 'Description', 'Due', 'Labels', 'Card #', 'Card URL']);
+
+    var rows = this._transformRows(cards);
+    spreadSheet.addRows(rows);
+
+    return spreadSheet;
+  };
 
   this._transformRows = function (cards) {
     var rows = [];
