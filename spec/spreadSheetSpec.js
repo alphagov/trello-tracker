@@ -45,5 +45,18 @@ describe("SpreadSheet", function () {
 
       expect(window.saveAs.calls.first().args[1]).toMatch("A board title.xlsx");
     })
+
+    it("Saves a file with the contents of the rows", function () {
+      var spreadSheet = new SpreadSheet('a title');
+      spreadSheet.addHeader(['header1']);
+      spreadSheet.addRows(['row1']);
+
+      spyOn(window, "saveAs");
+      spreadSheet.export();
+
+      var content = window.saveAs.calls.first().args[0];
+      expect(content.size).toBeGreaterThan(1);
+      expect(content.type).toMatch("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
+    })
   })
 });
