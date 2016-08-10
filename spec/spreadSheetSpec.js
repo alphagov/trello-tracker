@@ -1,6 +1,6 @@
 describe("SpreadSheet", function () {
 
-  describe("#addHeader", function(){
+  describe("#addHeader", function () {
     it("Add header to the first row of the spreadsheet", function () {
       var spreadSheet = new SpreadSheet('a title');
       var header = ['value1', 'value2', 'value3'];
@@ -9,22 +9,22 @@ describe("SpreadSheet", function () {
     });
   });
 
-  describe("#addRows", function() {
+  describe("#addRows", function () {
     it("Add rows to the worksheet", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1', 'header2']);
       var rows = [
-          ['1', '2'],
-          ['3', '4']
+        ['1', '2'],
+        ['3', '4']
       ];
       spreadSheet.addRows(rows);
-      expect(spreadSheet.worksheet.data[1]).toEqual(['1','2']);
-      expect(spreadSheet.worksheet.data[2]).toEqual(['3','4']);
+      expect(spreadSheet.worksheet.data[1]).toEqual(['1', '2']);
+      expect(spreadSheet.worksheet.data[2]).toEqual(['3', '4']);
     })
   })
 
-  describe("#export", function() {
-    it("Saves a new file", function() {
+  describe("#export", function () {
+    it("Saves a new file", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1']);
       spreadSheet.addRows(['row1']);
@@ -35,7 +35,7 @@ describe("SpreadSheet", function () {
       expect(window.saveAs).toHaveBeenCalled();
     })
 
-    it("Saves a file with the board title as the file name", function() {
+    it("Saves a file with the board title as the file name", function () {
       var spreadSheet = new SpreadSheet("A board title");
       spreadSheet.addHeader(['header1']);
       spreadSheet.addRows(['row1']);
