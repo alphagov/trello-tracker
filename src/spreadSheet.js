@@ -3,9 +3,10 @@ SpreadSheet = function (boardTitle) {
   this._init = function () {
     this.file = {
       worksheets: [[]], // worksheets has one empty worksheet (array)
-      creator: 'TrelloExport',
+      worksheets: [[]], 
+      creator: 'Trello Tracker',
       created: new Date(),
-      lastModifiedBy: 'TrelloExport',
+      lastModifiedBy: 'Trello Tracker',
       modified: new Date(),
       activeWorksheet: 0
     };
