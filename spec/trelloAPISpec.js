@@ -36,5 +36,24 @@ describe("TrelloAPI", function () {
 
       expect(name).toEqual('the board name');
     })
+
+    it("the callback is being passed all the cards", function () {
+      var trelloAPI = new TrelloAPI();
+
+      var deferred = $.Deferred();
+      var json = {
+        name: '',
+        cards: ['card1', 'card2']
+      };
+      spyOn($, 'ajax').and.returnValue(deferred.promise());
+      deferred.resolve(json);
+
+      var cards;
+      trelloAPI.getAllCards(function (allCards, boardName) {
+        cards = allCards;
+      });
+
+      expect(cards).toEqual(['card1', 'card2']);
+    })
   });
 });
