@@ -13,6 +13,20 @@ describe("SpreadSheet", function () {
     })
   });
 
+  describe("#getRow", function () {
+    it("Gets a specific row in the spreadsheet", function () {
+      var spreadSheet = new SpreadSheet('a title');
+      spreadSheet.addHeader(['header1', 'header2']);
+      var rows = [
+        ['1', '2'],
+        ['3', '4']
+      ];
+      spreadSheet.addRows(rows);
+      expect(spreadSheet.getRow(2)).toEqual(['3', '4'])
+
+    });
+  })
+
   describe("#addHeader", function () {
     it("Add header to the first row of the spreadsheet", function () {
       var spreadSheet = new SpreadSheet('a title');
