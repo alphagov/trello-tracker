@@ -11,7 +11,7 @@ Factcheck = function () {
 
   this.process = function (cards, listName) {
     var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link']);
+    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link', 'Departments/Agency']);
 
     var rows = this._transformRows(cards);
     spreadSheet.addRows(rows);
@@ -28,8 +28,6 @@ Factcheck = function () {
       $.each(card.labels, function (i, label) {
         if (label.name) {
           labels.push(label.name);
-        } else {
-          labels.push(label.color);
         }
       });
 

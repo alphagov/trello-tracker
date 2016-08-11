@@ -105,6 +105,18 @@ describe("Factcheck", function () {
         var row = spreadSheet.getRow(1);
         expect(row[6]).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
       });
+
+      it("display the card labels", function () {
+        var factcheck = new Factcheck();
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
+
+        var header = spreadSheet.getRow(0);
+        expect(header[7]).toEqual('Departments/Agency');
+
+        var row = spreadSheet.getRow(1);
+        expect(row[7]).toEqual("temp-label-1,temp-label-2");
+      });
+
       });
     });
   });
