@@ -49,7 +49,17 @@ describe("Factcheck", function () {
 
         var row = spreadSheet.getRow(1);
         expect(row[1]).toEqual('Card One Description');
+      });
 
+      it("has a card id", function(){
+        var factcheck = new Factcheck()
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+
+        var header = spreadSheet.getRow(0);
+        expect(header[2]).toEqual('Card ID');
+
+        var row = spreadSheet.getRow(1);
+        expect(row[2]).toEqual('card_one_id');
       });
     });
   });

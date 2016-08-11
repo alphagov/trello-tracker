@@ -76,7 +76,7 @@ FIXTURE_ONE_LIST_TWO_CARDS = {
   },
   "cards": [
     {
-      "id": "57ab3d406394de97ea2b933b",
+      "id": "card_one_id",
       "closed": false,
       "dateLastActivity": "2016-08-10T14:42:08.528Z",
       "desc": "Card One Description",
@@ -111,7 +111,7 @@ FIXTURE_ONE_LIST_TWO_CARDS = {
       "attachments": []
     },
     {
-      "id": "57ab3d4a399e8a1b78e53f34",
+      "id": "card_two_id",
       "closed": false,
       "dateLastActivity": "2016-08-10T14:42:18.346Z",
       "desc": "Card Two Description",
