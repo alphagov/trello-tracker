@@ -13,24 +13,24 @@ describe("Factcheck", function () {
     });
   });
 
-  describe("#process", function() {
-    it("returns a spreadsheet with a row per card", function(){
-      var factcheck = new Factcheck()
+  describe("#process", function () {
+    it("returns a spreadsheet with a row per card", function () {
+      var factcheck = new Factcheck();
       var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
       expect(spreadSheet.getRows().length).toEqual(3);
     });
-    it("returns a spreadsheet with a a header", function(){
-      var factcheck = new Factcheck()
+    it("returns a spreadsheet with a a header", function () {
+      var factcheck = new Factcheck();
       var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
       var header = spreadSheet.getRow(0);
       expect(header).toBeDefined();
     });
 
-    describe("row content", function(){
-      it("has a name", function(){
-        var factcheck = new Factcheck()
+    describe("row content", function () {
+      it("has a name", function () {
+        var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
@@ -40,8 +40,8 @@ describe("Factcheck", function () {
         expect(row[0]).toEqual('Card One');
       });
 
-      it("has a description", function(){
-        var factcheck = new Factcheck()
+      it("has a description", function () {
+        var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
@@ -51,8 +51,8 @@ describe("Factcheck", function () {
         expect(row[1]).toEqual('Card One Description');
       });
 
-      it("has a card id", function(){
-        var factcheck = new Factcheck()
+      it("has a card id", function () {
+        var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
@@ -62,8 +62,8 @@ describe("Factcheck", function () {
         expect(row[2]).toEqual('card_one_id');
       });
 
-      it("has a link to the card", function(){
-        var factcheck = new Factcheck()
+      it("has a link to the card", function () {
+        var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
@@ -74,7 +74,7 @@ describe("Factcheck", function () {
       });
 
       it("has a  status", function () {
-        var factcheck = new Factcheck()
+        var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
