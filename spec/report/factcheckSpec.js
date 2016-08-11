@@ -24,7 +24,7 @@ describe("Factcheck", function () {
       var factcheck = new Factcheck()
       var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
-      var header = spreadSheet.getRows()[0];
+      var header = spreadSheet.getRow(0);
       expect(header).toBeDefined();
     });
 
@@ -33,11 +33,11 @@ describe("Factcheck", function () {
         var factcheck = new Factcheck()
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
 
-        var header = spreadSheet.getRows()[0];
+        var header = spreadSheet.getRow(0);
         expect(header[0]).toEqual('Title');
 
-        var name = spreadSheet.getRows()[1];
-        expect(name[0]).toEqual('Card One');
+        var row = spreadSheet.getRow(1);
+        expect(row[0]).toEqual('Card One');
       });
     });
   });
