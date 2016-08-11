@@ -1,5 +1,18 @@
 describe("SpreadSheet", function () {
 
+  describe("#getRows", function () {
+    it("Gets all the rows in a worksheet, including the header", function () {
+      var spreadSheet = new SpreadSheet('a title');
+      spreadSheet.addHeader(['header1', 'header2']);
+      var rows = [
+        ['1', '2'],
+        ['3', '4']
+      ];
+      spreadSheet.addRows(rows);
+      expect(spreadSheet.getRows().length).toEqual(3)
+    })
+  });
+
   describe("#addHeader", function () {
     it("Add header to the first row of the spreadsheet", function () {
       var spreadSheet = new SpreadSheet('a title');
@@ -23,18 +36,6 @@ describe("SpreadSheet", function () {
     });
   });
 
-  describe("#getRows", function () {
-    it("Gets all the rows in a worksheet, including the header", function () {
-      var spreadSheet = new SpreadSheet('a title');
-      spreadSheet.addHeader(['header1', 'header2']);
-      var rows = [
-        ['1', '2'],
-        ['3', '4']
-      ];
-      spreadSheet.addRows(rows);
-      expect(spreadSheet.getRows().length).toEqual(3)
-    })
-  })
 
   describe("#export", function () {
     it("Saves a new file", function () {
