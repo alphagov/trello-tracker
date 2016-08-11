@@ -18,7 +18,7 @@ describe("SpreadSheet", function () {
       var spreadSheet = new SpreadSheet('a title');
       var header = ['value1', 'value2', 'value3'];
       spreadSheet.addHeader(header);
-      expect(spreadSheet.worksheet.data[0]).toEqual(header)
+      expect(spreadSheet.getRows()[0]).toEqual(header)
     });
   });
 
@@ -31,8 +31,8 @@ describe("SpreadSheet", function () {
         ['3', '4']
       ];
       spreadSheet.addRows(rows);
-      expect(spreadSheet.worksheet.data[1]).toEqual(['1', '2']);
-      expect(spreadSheet.worksheet.data[2]).toEqual(['3', '4']);
+      expect(spreadSheet.getRows()[1]).toEqual(['1', '2']);
+      expect(spreadSheet.getRows()[2]).toEqual(['3', '4']);
     });
   });
 
