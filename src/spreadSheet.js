@@ -27,6 +27,10 @@ SpreadSheet = function (boardTitle) {
     this.worksheet.data[0] = header;
   };
 
+  this.getRows = function () {
+    return this.worksheet.data;
+  };
+
   this.export = function () {
     var byteString = window.atob(xlsx(this.file).base64);
     var buffer = new ArrayBuffer(byteString.length);

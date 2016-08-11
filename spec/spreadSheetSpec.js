@@ -20,6 +20,16 @@ describe("SpreadSheet", function () {
       spreadSheet.addRows(rows);
       expect(spreadSheet.worksheet.data[1]).toEqual(['1', '2']);
       expect(spreadSheet.worksheet.data[2]).toEqual(['3', '4']);
+  describe("#getRows", function () {
+    it("Gets all the rows in a worksheet, including the header", function () {
+      var spreadSheet = new SpreadSheet('a title');
+      spreadSheet.addHeader(['header1', 'header2']);
+      var rows = [
+        ['1', '2'],
+        ['3', '4']
+      ];
+      spreadSheet.addRows(rows);
+      expect(spreadSheet.getRows().length).toEqual(3)
     })
   })
 
