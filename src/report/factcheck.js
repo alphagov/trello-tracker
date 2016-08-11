@@ -11,7 +11,7 @@ Factcheck = function () {
 
   this.process = function (cards, listName) {
     var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk link']);
+    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link']);
 
     var rows = this._transformRows(cards);
     spreadSheet.addRows(rows);
@@ -45,6 +45,7 @@ Factcheck = function () {
         card.id,
         card.shortUrl,
         'Factcheck',
+        self._findZendeskTicketID(card),
         self._findZendeskTicketURL(card),
         labels.toString()
       ];
@@ -63,6 +64,18 @@ Factcheck = function () {
         var attachment = card.attachments[i];
         if (attachment.url.match(/govuk.zendesk.com/))
           return attachment.url;
+      }
+    }
+    return '';
+  };
+
+  this._findZendeskTicketID = function (card) {
+    if (card.attachments.length > 0) {
+      for (var i = 0; i < card.attachments.length; i++) {
+        var attachment = card.attachments[i];
+        var match = attachment.url.match(/govuk.zendesk.com\/agent\/#\/tickets\/(.+)/);
+        if (match)
+          return match[1];
       }
     }
     return '';
