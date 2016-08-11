@@ -20,6 +20,9 @@ describe("SpreadSheet", function () {
       spreadSheet.addRows(rows);
       expect(spreadSheet.worksheet.data[1]).toEqual(['1', '2']);
       expect(spreadSheet.worksheet.data[2]).toEqual(['3', '4']);
+    });
+  });
+
   describe("#getRows", function () {
     it("Gets all the rows in a worksheet, including the header", function () {
       var spreadSheet = new SpreadSheet('a title');
@@ -43,7 +46,7 @@ describe("SpreadSheet", function () {
       spreadSheet.export();
 
       expect(window.saveAs).toHaveBeenCalled();
-    })
+    });
 
     it("Saves a file with the board title as the file name", function () {
       var spreadSheet = new SpreadSheet("A board title");
@@ -54,7 +57,7 @@ describe("SpreadSheet", function () {
       spreadSheet.export();
 
       expect(window.saveAs.calls.first().args[1]).toMatch("A board title.xlsx");
-    })
+    });
 
     it("Saves a file with the contents of the rows", function () {
       var spreadSheet = new SpreadSheet('a title');
@@ -68,5 +71,5 @@ describe("SpreadSheet", function () {
       expect(content.size).toBeGreaterThan(1);
       expect(content.type).toMatch("application/vnd.openxmlformats-officedocument.spreadsheetml.sheet");
     })
-  })
+  });
 });
