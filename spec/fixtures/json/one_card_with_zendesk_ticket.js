@@ -41,13 +41,13 @@ ONE_CARD_WITH_ZENDESK_TICKET = {
     "labels": [{
       "id": "57ab3cf884e677fd36e00cc7",
       "idBoard": "57ab3cf8aa51012f89e3d76f",
-      "name": "",
+      "name": "temp-label-1",
       "color": "green",
       "uses": 1
     }, {
       "id": "57ac9a2984e677fd36e458df",
       "idBoard": "57ab3cf8aa51012f89e3d76f",
-      "name": "pp",
+      "name": "temp-label-2",
       "color": "sky",
       "uses": 1
     }],
