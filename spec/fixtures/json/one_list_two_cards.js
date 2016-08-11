@@ -104,7 +104,7 @@ FIXTURE_ONE_LIST_TWO_CARDS = {
       "due": null,
       "idMembers": [],
       "labels": [],
-      "shortUrl": "https://trello.com/c/shV841qQ",
+      "shortUrl": "https://card.url",
       "subscribed": false,
       "url": "https://trello.com/c/shV841qQ/1-card-one",
       "stickers": [],

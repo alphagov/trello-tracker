@@ -61,6 +61,18 @@ describe("Factcheck", function () {
         var row = spreadSheet.getRow(1);
         expect(row[2]).toEqual('card_one_id');
       });
+
+      it("has a link to the card", function(){
+        var factcheck = new Factcheck()
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+
+        var header = spreadSheet.getRow(0);
+        expect(header[3]).toEqual('Card URL');
+
+        var row = spreadSheet.getRow(1);
+        expect(row[3]).toEqual("https://card.url");
+      });
+
     });
   });
 });

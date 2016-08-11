@@ -11,7 +11,7 @@ Factcheck = function () {
 
   this.process = function (cards, listName) {
     var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Due', 'Labels', 'Card URL']);
+    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Due', 'Labels' ]);
 
     var rows = this._transformRows(cards);
     spreadSheet.addRows(rows);
@@ -42,9 +42,9 @@ Factcheck = function () {
         card.name,
         card.desc,
         card.id,
+        card.shortUrl,
         due,
-        labels.toString(),
-        card.shortUrl
+        labels.toString()
       ];
 
       // Writes all closed items to the Archived tab
