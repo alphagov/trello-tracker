@@ -13,4 +13,12 @@ describe("Factcheck", function () {
     });
   });
 
+  describe("#process", function() {
+    it("returns a spreadsheet with a row per card", function(){
+      var factcheck = new Factcheck()
+      var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+
+      expect(spreadSheet.getRows().length).toEqual(3);
+    });
+  });
 });
