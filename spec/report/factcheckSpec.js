@@ -84,15 +84,27 @@ describe("Factcheck", function () {
         expect(row[4]).toEqual("Factcheck");
       });
 
+      it("has a zendesk id", function () {
+        var factcheck = new Factcheck();
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
+
+        var header = spreadSheet.getRow(0);
+        expect(header[5]).toEqual('Zendesk ID');
+
+        var row = spreadSheet.getRow(1);
+        expect(row[5]).toEqual("1292650");
+      });
+
       it("has a link to the zendesk ticket", function () {
         var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
 
         var header = spreadSheet.getRow(0);
-        expect(header[5]).toEqual('Zendesk link');
+        expect(header[6]).toEqual('Zendesk link');
 
         var row = spreadSheet.getRow(1);
-        expect(row[5]).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
+        expect(row[6]).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
+      });
       });
     });
   });
