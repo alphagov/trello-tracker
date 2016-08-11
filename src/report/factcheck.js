@@ -11,7 +11,7 @@ Factcheck = function () {
 
   this.process = function (cards, listName) {
     var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Due', 'Labels' ]);
+    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Labels' ]);
 
     var rows = this._transformRows(cards);
     spreadSheet.addRows(rows);
@@ -43,7 +43,7 @@ Factcheck = function () {
         card.desc,
         card.id,
         card.shortUrl,
-        due,
+        'Factcheck',
         labels.toString()
       ];
 
