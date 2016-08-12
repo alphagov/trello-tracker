@@ -16,6 +16,8 @@
         "lib/FileSaver.js",
         "lib/xlsx.js",
         "lib/jszip.min.js",
+        "lib/moment.min.js",
+        "lib/locales.min.js",
         "src/menu.js",
         "src/spreadSheet.js",
         "src/trelloAPI.js",
