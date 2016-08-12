@@ -16,13 +16,13 @@ describe("Factcheck", function () {
   describe("#process", function () {
     it("returns a spreadsheet with a row per card", function () {
       var factcheck = new Factcheck();
-      var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+      var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
       expect(spreadSheet.getRows().length).toEqual(3);
     });
     it("returns a spreadsheet with a a header", function () {
       var factcheck = new Factcheck();
-      var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+      var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
       var header = spreadSheet.getRow(0);
       expect(header).toBeDefined();
@@ -31,7 +31,7 @@ describe("Factcheck", function () {
     describe("row content", function () {
       it("has a name", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[0]).toEqual('Title');
@@ -42,7 +42,7 @@ describe("Factcheck", function () {
 
       it("has a description", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[1]).toEqual('Description');
@@ -53,7 +53,7 @@ describe("Factcheck", function () {
 
       it("has a card id", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[2]).toEqual('Card ID');
@@ -64,7 +64,7 @@ describe("Factcheck", function () {
 
       it("has a link to the card", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[3]).toEqual('Card URL');
@@ -75,7 +75,7 @@ describe("Factcheck", function () {
 
       it("has a  status", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name');
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[4]).toEqual('Status');
@@ -86,7 +86,7 @@ describe("Factcheck", function () {
 
       it("has a zendesk id", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[5]).toEqual('Zendesk ID');
@@ -97,7 +97,7 @@ describe("Factcheck", function () {
 
       it("has a link to the zendesk ticket", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[6]).toEqual('Zendesk link');
@@ -108,7 +108,7 @@ describe("Factcheck", function () {
 
       it("display the card labels", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name');
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[7]).toEqual('Departments/Agency');
@@ -117,6 +117,20 @@ describe("Factcheck", function () {
         expect(row[7]).toEqual("temp-label-1,temp-label-2");
       });
 
+      it("shows how long the card has had it's current status", function () {
+        var today = moment('2016-08-13').toDate();
+        jasmine.clock().mockDate(today);
+
+        var factcheck = new Factcheck();
+        var spreadSheet = factcheck.process(ONE_LIST_MOVED_CARD.cards, 'List Name', ONE_LIST_MOVED_CARD.actions);
+
+
+        var header = spreadSheet.getRow(0);
+        expect(header[8]).toEqual('Status Days');
+
+        var row = spreadSheet.getRow(2);
+        expect(row[8]).toEqual(11);
+      });
       });
     });
   });
