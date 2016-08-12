@@ -2,24 +2,24 @@ Factcheck = function () {
 
   this.toSpreadSheet = function () {
     var self = this;
-    TrelloAPI.getAllCards(function (cards, listName) {
-      var spreadSheet = self.process(cards, listName);
+    TrelloAPI.getAllCards(function (cards, listName, actions) {
+      var spreadSheet = self.process(cards, listName, actions);
 
       spreadSheet.export();
     });
   };
 
-  this.process = function (cards, listName) {
+  this.process = function (cards, listName, actions) {
     var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link', 'Departments/Agency']);
+    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link', 'Departments/Agency', 'Status Days']);
 
-    var rows = this._transformRows(cards);
+    var rows = this._transformRows(cards, actions);
     spreadSheet.addRows(rows);
 
     return spreadSheet;
   };
 
-  this._transformRows = function (cards) {
+  this._transformRows = function (cards, actions) {
     var rows = [];
     var self = this;
     $.each(cards, function (i, card) {
@@ -45,7 +45,8 @@ Factcheck = function () {
         'Factcheck',
         self._findZendeskTicketID(card),
         self._findZendeskTicketURL(card),
-        labels.toString()
+        labels.toString(),
+        self._findCardStatusDays(card.id, actions),
       ];
 
       // Writes all closed items to the Archived tab
@@ -54,6 +55,24 @@ Factcheck = function () {
       }
     });
     return rows;
+  };
+
+  this._findCardStatusDays = function (cardID, actions){
+    var self = this;
+    if (actions.length > 0) {
+      for (var i = 0; i < actions.length; i++){
+        var action = actions[i];
+        if (action.data.card.id === cardID) {
+          if (action.data.listAfter) {
+            var today = moment();
+            var statusDate = moment(action.date);
+
+            return today.diff(statusDate, "days");
+          }
+        }
+      }
+    }
+    return '';
   };
 
   this._findZendeskTicketURL = function (card) {
