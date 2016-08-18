@@ -31,7 +31,7 @@ describe("Trello", function () {
       });
 
       expect(name).toEqual('the board name');
-    })
+    });
 
     it("the callback is being passed all the cards", function () {
       var deferred = $.Deferred();
@@ -48,6 +48,24 @@ describe("Trello", function () {
       });
 
       expect(cards).toEqual(['card1', 'card2']);
-    })
+    });
   });
+
+  describe("#findZendeskTicketID", function(){
+    it("returns the zendesk id for a Card", function () {
+      card = {
+        "id": "the id",
+        "attachments": [{
+          "url": "https://govuk.zendesk.com/agent/#/tickets/1292650",
+          "id": "the attachment id1"
+        }, {
+          "url": "https://www.google.co.uk",
+          "id": "the attachment id2"
+        }]
+      };
+      var result = Trello.findZendeskTicketID(card);
+      expect(result).toEqual("1292650");
+    });
+  });
+
 });

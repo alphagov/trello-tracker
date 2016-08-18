@@ -85,6 +85,8 @@ describe("Factcheck", function () {
       });
 
       it("has a zendesk id", function () {
+        spyOn(Trello,'findZendeskTicketID').and.returnValue('expected-id');
+
         var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
 
@@ -92,7 +94,7 @@ describe("Factcheck", function () {
         expect(header[5]).toEqual('Zendesk ID');
 
         var row = spreadSheet.getRow(1);
-        expect(row[5]).toEqual("1292650");
+        expect(row[5]).toEqual("expected-id");
       });
 
       it("has a link to the zendesk ticket", function () {
