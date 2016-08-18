@@ -51,7 +51,7 @@ describe("Trello", function () {
     });
   });
 
-  describe("#findZendeskTicketID", function(){
+  describe("#findZendeskTicketID", function () {
     it("returns the zendesk id for a Card", function () {
       card = {
         "id": "the id",
@@ -68,4 +68,20 @@ describe("Trello", function () {
     });
   });
 
+  describe("#findZendeskTicketURL", function () {
+    it("has a link to the zendesk ticket", function () {
+      card = {
+        "id": "the id",
+        "attachments": [{
+          "url": "https://govuk.zendesk.com/agent/#/tickets/1292650",
+          "id": "the attachment id1"
+        }, {
+          "url": "https://www.google.co.uk",
+          "id": "the attachment id2"
+        }]
+      };
+      var result = Trello.findZendeskTicketURL(card);
+      expect(result).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
+    });
+  });
 });

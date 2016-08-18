@@ -98,6 +98,7 @@ describe("Factcheck", function () {
       });
 
       it("has a link to the zendesk ticket", function () {
+        spyOn(Trello,'findZendeskTicketURL').and.returnValue('expected-url');
         var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
 
@@ -105,7 +106,7 @@ describe("Factcheck", function () {
         expect(header[6]).toEqual('Zendesk link');
 
         var row = spreadSheet.getRow(1);
-        expect(row[6]).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
+        expect(row[6]).toEqual("expected-url");
       });
 
       it("display the card labels", function () {
