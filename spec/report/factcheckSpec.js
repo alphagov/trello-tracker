@@ -131,6 +131,16 @@ describe("Factcheck", function () {
         var row = spreadSheet.getRow(2);
         expect(row[8]).toEqual(11);
       });
+
+      it("has a link to the publisher preview link", function () {
+        var factcheck = new Factcheck();
+        var spreadSheet = factcheck.process(ONE_CARD_WITH_PUBLISHING_TICKET.cards, 'List Name', []);
+
+        var header = spreadSheet.getRow(0);
+        expect(header[9]).toEqual('Publishing URL');
+
+        var row = spreadSheet.getRow(1);
+        expect(row[9]).toEqual("https://publisher.publishing.service.gov.uk/something");
       });
     });
   });
