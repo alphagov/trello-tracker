@@ -2,10 +2,10 @@ describe("Factcheck", function () {
 
   describe("#toSpreadSheet", function () {
     it("request all cards from Trello", function () {
-      spyOn(TrelloAPI, 'getAllCards');
+      spyOn(Trello, 'getAllCards');
 
       new Factcheck().toSpreadSheet();
-      expect(TrelloAPI.getAllCards).toHaveBeenCalled();
+      expect(Trello.getAllCards).toHaveBeenCalled();
     });
 
     xit("process and export", function () {
