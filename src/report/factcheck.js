@@ -72,7 +72,7 @@ Factcheck = function () {
         }
       }
     }
-    return '';
+    return '-';
   };
 
   this._findZendeskTicketURL = function (card) {
@@ -83,7 +83,7 @@ Factcheck = function () {
           return attachment.url;
       }
     }
-    return '';
+    return '-';
   };
 
   this._findZendeskTicketID = function (card) {
@@ -95,6 +95,6 @@ Factcheck = function () {
           return match[1];
       }
     }
-    return '';
+    return '-';
   };
 };
