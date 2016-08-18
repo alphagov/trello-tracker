@@ -44,7 +44,7 @@ Factcheck = function () {
         card.shortUrl,
         'Factcheck',
         Trello.findZendeskTicketID(card),
-        self._findZendeskTicketURL(card),
+        Trello.findZendeskTicketURL(card),
         labels.toString(),
         self._findCardStatusDays(card.id, actions),
         self._findPublishingURL(card)
@@ -71,17 +71,6 @@ Factcheck = function () {
             return today.diff(statusDate, "days");
           }
         }
-      }
-    }
-    return '-';
-  };
-
-  this._findZendeskTicketURL = function (card) {
-    if (card.attachments.length > 0) {
-      for (var i = 0; i < card.attachments.length; i++) {
-        var attachment = card.attachments[i];
-        if (attachment.url.match(/govuk.zendesk.com/))
-          return attachment.url;
       }
     }
     return '-';

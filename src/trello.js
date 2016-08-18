@@ -26,6 +26,17 @@ Trello = {
       }
     }
     return '-';
+  },
+
+  findZendeskTicketURL: function (card) {
+    if (card.attachments.length > 0) {
+      for (var i = 0; i < card.attachments.length; i++) {
+        var attachment = card.attachments[i];
+        if (attachment.url.match(/govuk.zendesk.com/))
+          return attachment.url;
+      }
+    }
+    return '-';
   }
 
 };
