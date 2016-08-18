@@ -20,7 +20,7 @@
         "lib/locales.min.js",
         "src/menu.js",
         "src/spreadSheet.js",
-        "src/trelloAPI.js",
+        "src/trello.js",
         "src/report/factcheck.js",
         "trelloexport.js"
       ]

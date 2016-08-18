@@ -2,7 +2,7 @@ Factcheck = function () {
 
   this.toSpreadSheet = function () {
     var self = this;
-    TrelloAPI.getAllCards(function (cards, listName, actions) {
+    Trello.getAllCards(function (cards, listName, actions) {
       var spreadSheet = self.process(cards, listName, actions);
 
       spreadSheet.export();
