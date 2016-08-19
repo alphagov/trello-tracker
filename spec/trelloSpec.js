@@ -84,4 +84,21 @@ describe("Trello", function () {
       expect(result).toEqual("https://govuk.zendesk.com/agent/#/tickets/1292650");
     });
   });
+
+  describe("#findPublishingURL", function () {
+    it("has a link to the Publishing URL", function () {
+      card = {
+        "id": "the id",
+        "attachments": [{
+          "url": "https://publisher.publishing.service.gov.uk/something",
+          "id": "the attachment id1"
+        }, {
+          "url": "https://www.google.co.uk",
+          "id": "the attachment id2"
+        }]
+      };
+      var result = Trello.findPublishingURL(card);
+      expect(result).toEqual("https://publisher.publishing.service.gov.uk/something");
+    });
+  });
 });
