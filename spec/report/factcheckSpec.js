@@ -14,6 +14,7 @@ describe("Factcheck", function () {
   });
 
   describe("#process", function () {
+
     it("returns a spreadsheet with a row per card", function () {
       var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
