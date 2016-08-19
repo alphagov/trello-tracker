@@ -1,36 +1,29 @@
-Factcheck = function () {
-
-  this.toSpreadSheet = function () {
-    var self = this;
-    Trello.getAllCards(function (cards, listName, actions) {
-      var spreadSheet = self.process(cards, listName, actions);
+var Factcheck = {
+  toSpreadSheet: function () {
+    Trello.getAllCards($.proxy(function (cards, boardName, actions) {
+      var spreadSheet = this.process(cards, boardName, actions);
 
       spreadSheet.export();
-    });
-  };
+    }, this));
+  },
 
-  this.process = function (cards, listName, actions) {
-    var spreadSheet = new SpreadSheet(listName);
-    spreadSheet.addHeader(['Title', 'Description', 'Card ID', 'Card URL', 'Status', 'Zendesk ID', 'Zendesk link', 'Departments/Agency', 'Status Days', 'Publishing URL']);
+  process: function (cards, boardName, actions) {
+    var spreadSheet = new SpreadSheet(boardName);
+    spreadSheet.addHeader([
+      'Title', 'Description', 'Card ID', 'Card URL', 'Status',
+      'Zendesk ID', 'Zendesk link', 'Departments/Agency',
+      'Status Days', 'Publishing URL'
+    ]);
 
-    var rows = this._transformRows(cards, actions);
+    var rows = this._doParseRows(cards, actions);
     spreadSheet.addRows(rows);
 
     return spreadSheet;
-  };
+  },
 
-  this._transformRows = function (cards, actions) {
-    var rows = [];
-    var self = this;
-    $.each(cards, function (i, card) {
-
-      // Need to set dates to the Date type so xlsx.js sets the right datatype
-      var due = card.due || '';
-      if (due !== '') {
-        due = new Date(due);
-      }
-
-      var rowData = [
+  _doParseRows: function (cards, actions) {
+    var rows = $.map(cards, function (card) {
+      return [[
         card.name,
         card.desc,
         card.id,
@@ -41,14 +34,9 @@ Factcheck = function () {
         Trello.findLabels(card).toString(),
         Trello.findCardStatusDays(card, actions),
         Trello.findPublishingURL(card)
-      ];
-
-      // Writes all closed items to the Archived tab
-      if (!card.closed) {
-        rows.push(rowData);
-      }
+      ]];
     });
-    return rows;
-  };
 
+    return rows;
+  }
 };
