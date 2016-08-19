@@ -1,4 +1,4 @@
-FIXTURE_ONE_LIST_TWO_CARDS = {
+ONE_LIST_TWO_CARDS = {
   "id": "57ab3cf8aa51012f89e3d76f",
   "name": "Trello Tracker Test",
   "closed": false,
