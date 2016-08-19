@@ -103,7 +103,19 @@ FIXTURE_ONE_LIST_TWO_CARDS = {
       },
       "due": null,
       "idMembers": [],
-      "labels": [],
+      "labels": [{
+        "id": "57ab3cf884e677fd36e00cc7",
+        "idBoard": "57ab3cf8aa51012f89e3d76f",
+        "name": "temp-label-1",
+        "color": "green",
+        "uses": 1
+      }, {
+        "id": "57ac9a2984e677fd36e458df",
+        "idBoard": "57ab3cf8aa51012f89e3d76f",
+        "name": "temp-label-2",
+        "color": "sky",
+        "uses": 1
+      }],
       "shortUrl": "https://card.url",
       "subscribed": false,
       "url": "https://trello.com/c/shV841qQ/1-card-one",
