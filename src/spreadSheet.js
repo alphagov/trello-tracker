@@ -1,59 +1,40 @@
-SpreadSheet = function (boardTitle) {
-
-  this._init = function () {
-    this.file = {
-      worksheets: [[]],
-      creator: 'Trello Tracker',
-      created: new Date(),
-      lastModifiedBy: 'Trello Tracker',
-      modified: new Date(),
-      activeWorksheet: 0
-    };
-
-    this.worksheet = this.file.worksheets[0];
-    this.worksheet.name = boardTitle.substring(0, 22);  // Over 22 chars causes Excel error, don't know why
-    this.worksheet.data = [];
-
+var SpreadSheet = function (boardTitle) {
+  this.file = {
+    worksheets: [[]], creator: 'Trello Tracker', created: new Date(),
+    lastModifiedBy: 'Trello Tracker', modified: new Date(), activeWorksheet: 0
   };
 
-  this.addRows = function (rows) {
-    var self = this;
-    $.each(rows, function (i, row) {
-      self._addRow(row);
-    });
-  };
+  this.worksheet = this.file.worksheets[0];
+  this.worksheet.name = boardTitle.substring(0, 22);
+  this.worksheet.data = [];
+};
 
-  this.addHeader = function (header) {
-    this.worksheet.data[0] = header;
-  };
+SpreadSheet.prototype.addRows = function (rows) {
+  $.each(rows, $.proxy(this._addRow, this));
+};
 
-  this.getRows = function () {
-    return this.worksheet.data;
-  };
+SpreadSheet.prototype.addHeader = function (header) {
+  this.worksheet.data[0] = header;
+};
 
-  this.getRow = function (index) {
-    return this.getRows()[index];
-  };
+SpreadSheet.prototype.getRows = function () {
+  return this.worksheet.data;
+};
 
-  this.export = function () {
-    var byteString = window.atob(xlsx(this.file).base64);
-    var buffer = new ArrayBuffer(byteString.length);
-    var intArray = new Uint8Array(buffer);
+SpreadSheet.prototype.getRow = function (index) {
+  return this.getRows()[index];
+};
 
-    for (var i = 0; i < byteString.length; i += 1) {
-      intArray[i] = byteString.charCodeAt(i);
-    }
+SpreadSheet.prototype.export = function () {
+  var byteString = window.atob(xlsx(this.file).base64);
+  var intArray = new Uint8Array(new ArrayBuffer(byteString.length));
+  for (var i = 0; i < byteString.length; i += 1) {
+    intArray[i] = byteString.charCodeAt(i);
+  }
+  var blob = new Blob([intArray], {type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'});
+  saveAs(blob, this.worksheet.name + '.xlsx');
+};
 
-    var blob = new Blob([intArray], {
-      type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    });
-
-    saveAs(blob, boardTitle + '.xlsx');
-  };
-
-  this._addRow = function (rowData) {
-    this.worksheet.data.push(rowData);
-  };
-
-  this._init();
+SpreadSheet.prototype._addRow = function (i, rowData) {
+  this.worksheet.data.push(rowData);
 };
