@@ -47,7 +47,7 @@ Factcheck = function () {
         Trello.findZendeskTicketURL(card),
         labels.toString(),
         self._findCardStatusDays(card.id, actions),
-        self._findPublishingURL(card)
+        Trello.findPublishingURL(card)
       ];
 
       // Writes all closed items to the Archived tab
@@ -76,14 +76,4 @@ Factcheck = function () {
     return '-';
   };
 
-  this._findPublishingURL = function (card) {
-    if (card.attachments.length > 0) {
-      for (var i = 0; i < card.attachments.length; i++) {
-        var attachment = card.attachments[i];
-        if (attachment.url.match(/publishing.service.gov.uk/))
-          return attachment.url;
-      }
-    }
-    return '-';
-  };
 };
