@@ -102,7 +102,6 @@ describe("Trello", function () {
     });
   });
 
-
   describe("#findPublishingURL", function () {
     it("shows how long the card has had it's current status", function () {
       card = {
@@ -129,6 +128,22 @@ describe("Trello", function () {
 
       var result = Trello.findCardStatusDays(card, actions);
       expect(result).toEqual(11);
+    });
+  });
+
+  describe("#findLabels", function () {
+    it("shows how long the card has had it's current status", function () {
+      card = {
+        id: 'just-an-id',
+        labels: [{
+          name: 'name1'
+        }, {
+          name: 'name2'
+        }]
+      };
+
+      var result = Trello.findLabels(card);
+      expect(result).toEqual(['name1', 'name2']);
     });
   });
 });

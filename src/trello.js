@@ -55,7 +55,7 @@ Trello = {
     if (actions.length > 0) {
       for (var i = 0; i < actions.length; i++) {
         var action = actions[i];
-        if (action.data.card.id === card.id ) {
+        if (action.data.card.id === card.id) {
           if (action.data.listAfter) {
             var today = moment();
             var statusDate = moment(action.date);
@@ -66,6 +66,15 @@ Trello = {
       }
     }
     return '-';
-  }
+  },
 
+  findLabels: function (card) {
+    var labels = [];
+    $.each(card.labels, function (i, label) {
+      if (label.name) {
+        labels.push(label.name);
+      }
+    });
+    return labels;
+  }
 };

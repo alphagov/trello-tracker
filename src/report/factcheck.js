@@ -24,13 +24,6 @@ Factcheck = function () {
     var self = this;
     $.each(cards, function (i, card) {
 
-      var labels = [];
-      $.each(card.labels, function (i, label) {
-        if (label.name) {
-          labels.push(label.name);
-        }
-      });
-
       // Need to set dates to the Date type so xlsx.js sets the right datatype
       var due = card.due || '';
       if (due !== '') {
@@ -45,7 +38,7 @@ Factcheck = function () {
         'Factcheck',
         Trello.findZendeskTicketID(card),
         Trello.findZendeskTicketURL(card),
-        labels.toString(),
+        Trello.findLabels(card).toString(),
         Trello.findCardStatusDays(card, actions),
         Trello.findPublishingURL(card)
       ];

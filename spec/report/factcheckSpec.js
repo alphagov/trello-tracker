@@ -110,6 +110,7 @@ describe("Factcheck", function () {
       });
 
       it("display the card labels", function () {
+        spyOn(Trello, 'findLabels').and.returnValue(['label1','label2']);
         var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
@@ -117,7 +118,7 @@ describe("Factcheck", function () {
         expect(header[7]).toEqual('Departments/Agency');
 
         var row = spreadSheet.getRow(1);
-        expect(row[7]).toEqual("temp-label-1,temp-label-2");
+        expect(row[7]).toEqual("label1,label2");
       });
 
       it("shows how long the card has had it's current status", function () {
