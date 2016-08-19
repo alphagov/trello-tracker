@@ -4,7 +4,7 @@ $(function () {
   "use strict";
 
   var config = {
-    option1: new Factcheck()
+    option1: Factcheck
   };
   new Menu(config).init();
 });
