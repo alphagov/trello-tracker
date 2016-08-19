@@ -49,6 +49,23 @@ Trello = {
       }
     }
     return '-';
+  },
+
+  findCardStatusDays: function (card, actions) {
+    if (actions.length > 0) {
+      for (var i = 0; i < actions.length; i++) {
+        var action = actions[i];
+        if (action.data.card.id === card.id ) {
+          if (action.data.listAfter) {
+            var today = moment();
+            var statusDate = moment(action.date);
+
+            return today.diff(statusDate, "days");
+          }
+        }
+      }
+    }
+    return '-';
   }
 
 };

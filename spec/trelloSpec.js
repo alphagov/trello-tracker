@@ -101,4 +101,34 @@ describe("Trello", function () {
       expect(result).toEqual("https://publisher.publishing.service.gov.uk/something");
     });
   });
+
+
+  describe("#findPublishingURL", function () {
+    it("shows how long the card has had it's current status", function () {
+      card = {
+        "id": "the id"
+      };
+
+      actions = [
+        {
+          "data": {
+            "listAfter": {
+              "name": "List One",
+              "id": "57ab3d0f17e5767d77da48bc"
+            },
+            "card": {
+              "id": "the id"
+            }
+          },
+          "date": "2016-08-01T09:33:30.800Z"
+        }
+      ];
+
+      var today = moment('2016-08-13').toDate();
+      jasmine.clock().mockDate(today);
+
+      var result = Trello.findCardStatusDays(card, actions);
+      expect(result).toEqual(11);
+    });
+  });
 });
