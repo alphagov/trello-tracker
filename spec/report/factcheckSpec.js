@@ -121,8 +121,7 @@ describe("Factcheck", function () {
       });
 
       it("shows how long the card has had it's current status", function () {
-        var today = moment('2016-08-13').toDate();
-        jasmine.clock().mockDate(today);
+        spyOn(Trello, 'findCardStatusDays').and.returnValue(99);
 
         var factcheck = new Factcheck();
         var spreadSheet = factcheck.process(ONE_LIST_MOVED_CARD.cards, 'List Name', ONE_LIST_MOVED_CARD.actions);
@@ -132,7 +131,7 @@ describe("Factcheck", function () {
         expect(header[8]).toEqual('Status Days');
 
         var row = spreadSheet.getRow(2);
-        expect(row[8]).toEqual(11);
+        expect(row[8]).toEqual(99);
       });
 
       it("has a link to the publisher preview link", function () {

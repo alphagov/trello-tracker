@@ -46,7 +46,7 @@ Factcheck = function () {
         Trello.findZendeskTicketID(card),
         Trello.findZendeskTicketURL(card),
         labels.toString(),
-        self._findCardStatusDays(card.id, actions),
+        Trello.findCardStatusDays(card, actions),
         Trello.findPublishingURL(card)
       ];
 
@@ -56,24 +56,6 @@ Factcheck = function () {
       }
     });
     return rows;
-  };
-
-  this._findCardStatusDays = function (cardID, actions){
-    var self = this;
-    if (actions.length > 0) {
-      for (var i = 0; i < actions.length; i++){
-        var action = actions[i];
-        if (action.data.card.id === cardID) {
-          if (action.data.listAfter) {
-            var today = moment();
-            var statusDate = moment(action.date);
-
-            return today.diff(statusDate, "days");
-          }
-        }
-      }
-    }
-    return '-';
   };
 
 };
