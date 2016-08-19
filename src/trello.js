@@ -48,7 +48,7 @@ var Trello = {
     return '-';
   },
 
-  findCardStatusDays: function (card, actions) {
+  totalDaysInCurrentColumn: function (card, actions) {
     for (var i = 0; i < actions.length; i++) {
       var action = actions[i],
           actionCardId = action.data.card.id;

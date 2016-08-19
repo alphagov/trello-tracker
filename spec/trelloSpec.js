@@ -126,7 +126,7 @@ describe("Trello", function () {
       var today = moment('2016-08-13').toDate();
       jasmine.clock().mockDate(today);
 
-      var result = Trello.findCardStatusDays(card, actions);
+      var result = Trello.totalDaysInCurrentColumn(card, actions);
       expect(result).toEqual(11);
     });
   });

@@ -112,7 +112,7 @@ describe("Factcheck", function () {
       });
 
       it("shows how long the card has had it's current status", function () {
-        spyOn(Trello, 'findCardStatusDays').and.returnValue(99);
+        spyOn(Trello, 'totalDaysInCurrentColumn').and.returnValue(99);
 
         var spreadSheet = Factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', FIXTURE_ONE_LIST_TWO_CARDS.actions);
 
