@@ -32,7 +32,7 @@ var Factcheck = {
         Trello.findZendeskTicketID(card),
         Trello.findZendeskTicketURL(card),
         Trello.findLabels(card).toString(),
-        Trello.findCardStatusDays(card, actions),
+        Trello.totalDaysInCurrentColumn(card, actions),
         Trello.findPublishingURL(card)
       ]];
     });
