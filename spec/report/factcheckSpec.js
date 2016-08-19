@@ -88,7 +88,7 @@ describe("Factcheck", function () {
         spyOn(Trello, 'findZendeskTicketID').and.returnValue('expected-id');
 
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[5]).toEqual('Zendesk ID');
@@ -100,7 +100,7 @@ describe("Factcheck", function () {
       it("has a link to the zendesk ticket", function () {
         spyOn(Trello, 'findZendeskTicketURL').and.returnValue('expected-url');
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[6]).toEqual('Zendesk link');
@@ -111,7 +111,7 @@ describe("Factcheck", function () {
 
       it("display the card labels", function () {
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_ZENDESK_TICKET.cards, 'List Name', []);
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[7]).toEqual('Departments/Agency');
@@ -124,7 +124,7 @@ describe("Factcheck", function () {
         spyOn(Trello, 'findCardStatusDays').and.returnValue(99);
 
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_LIST_MOVED_CARD.cards, 'List Name', ONE_LIST_MOVED_CARD.actions);
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', FIXTURE_ONE_LIST_TWO_CARDS.actions);
 
 
         var header = spreadSheet.getRow(0);
@@ -137,7 +137,7 @@ describe("Factcheck", function () {
       it("has a link to the publisher preview link", function () {
         spyOn(Trello, 'findPublishingURL').and.returnValue('expected-url');
         var factcheck = new Factcheck();
-        var spreadSheet = factcheck.process(ONE_CARD_WITH_PUBLISHING_TICKET.cards, 'List Name', []);
+        var spreadSheet = factcheck.process(FIXTURE_ONE_LIST_TWO_CARDS.cards, 'List Name', []);
 
         var header = spreadSheet.getRow(0);
         expect(header[9]).toEqual('Publishing URL');
