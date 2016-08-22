@@ -6,7 +6,7 @@ describe("Trello", function () {
       deferred.resolve({});
       spyOn($, 'ajax').and.returnValue(deferred.promise());
 
-      Trello.setBoardURL('/b/the_board_id/the_board_name');
+      Trello.setBoardURL('https://trello.com/b/the_board_id/content-development');
       Trello.getAllCards(function (data) {
         //noop
       });
@@ -150,6 +150,13 @@ describe("Trello", function () {
     it("shows how long the card has had it's current status", function () {
       Trello.setBoardURL('the-board-url');
       expect(Trello.getBoardUrl()).toEqual('the-board-url');
+    });
+  });
+
+  describe("#setBoardId", function () {
+    it("shows how long the card has had it's current status", function () {
+      Trello.setBoardURL('https://trello.com/b/bVfnXnEc/content-development');
+      expect(Trello.getBoardId()).toEqual('bVfnXnEc');
     });
   });
 });
