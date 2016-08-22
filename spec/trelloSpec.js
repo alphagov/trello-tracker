@@ -1,7 +1,7 @@
 describe("Trello", function () {
 
   describe("#getAllCards", function () {
-    it("requests cards for the current Trello board", function () {
+    it("query the cards for a specific board", function () {
       var deferred = $.Deferred();
       deferred.resolve({});
       spyOn($, 'ajax').and.returnValue(deferred.promise());
@@ -15,7 +15,7 @@ describe("Trello", function () {
       expect(call.args[0]).toMatch(/the_board_id/);
     });
 
-    it("the callback is being passed the board name", function () {
+    it("return the board name as a callback parameter", function () {
       var deferred = $.Deferred();
       var json = {
         name: 'the board name',
@@ -32,7 +32,7 @@ describe("Trello", function () {
       expect(name).toEqual('the board name');
     });
 
-    it("the callback is being passed all the cards", function () {
+    it("return the cards as a callback parameter", function () {
       var deferred = $.Deferred();
       var json = {
         name: '',
@@ -47,6 +47,24 @@ describe("Trello", function () {
       });
 
       expect(cards).toEqual(['card1', 'card2']);
+    });
+
+    it("return the actions as a callback parameter", function () {
+      var deferred = $.Deferred();
+      var json = {
+        name: '',
+        cards: ['card1', 'card2'],
+        actions: ['action1', 'action2']
+      };
+      spyOn($, 'ajax').and.returnValue(deferred.promise());
+      deferred.resolve(json);
+
+      var actions;
+      Trello.getAllCards(function (allCards, boardName, allActions) {
+        actions = allActions;
+      });
+
+      expect(actions).toEqual(['action1', 'action2']);
     });
   });
 
@@ -85,7 +103,7 @@ describe("Trello", function () {
   });
 
   describe("#findPublishingURL", function () {
-    it("has a link to the Publishing URL", function () {
+    it("returns a link to the Publishing URL", function () {
       card = {
         "id": "the id",
         "attachments": [{
@@ -101,12 +119,11 @@ describe("Trello", function () {
     });
   });
 
-  describe("#findPublishingURL", function () {
-    it("shows how long the card has had it's current status", function () {
+  describe("#totalDaysInCurrentColumn", function () {
+    it("return the number of days in the column", function () {
       card = {
         "id": "the id"
       };
-
       actions = [
         {
           "data": {
@@ -121,7 +138,6 @@ describe("Trello", function () {
           "date": "2016-08-01T09:33:30.800Z"
         }
       ];
-
       var today = moment('2016-08-13').toDate();
       jasmine.clock().mockDate(today);
 
@@ -131,7 +147,7 @@ describe("Trello", function () {
   });
 
   describe("#findLabels", function () {
-    it("shows how long the card has had it's current status", function () {
+    it("return the labels", function () {
       card = {
         id: 'just-an-id',
         labels: [{
@@ -147,14 +163,14 @@ describe("Trello", function () {
   });
 
   describe("#setBoardUrl", function () {
-    it("shows how long the card has had it's current status", function () {
+    it("set the Board Url", function () {
       Trello.setBoardURL('the-board-url');
       expect(Trello.getBoardUrl()).toEqual('the-board-url');
     });
   });
 
-  describe("#setBoardId", function () {
-    it("shows how long the card has had it's current status", function () {
+  describe("#getBoardId", function () {
+    it("returns the board ID", function () {
       Trello.setBoardURL('https://trello.com/b/bVfnXnEc/content-development');
       expect(Trello.getBoardId()).toEqual('bVfnXnEc');
     });

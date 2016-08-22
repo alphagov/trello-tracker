@@ -1,10 +1,12 @@
-var Trello = {};
+var Trello = {
+  EMPTY_VALUE: '-'
+};
 
 Trello.setBoardURL = function (url) {
   this.boardUrl = url;
 };
 
-Trello.getBoardUrl= function() {
+Trello.getBoardUrl = function () {
   return this.boardUrl;
 };
 
@@ -28,8 +30,7 @@ Trello.findZendeskTicketID = function (card) {
     if (match)
       return match[1];
   }
-
-  return '-';
+  return this.EMPTY_VALUE;
 };
 
 Trello.findZendeskTicketURL = function (card) {
@@ -38,8 +39,7 @@ Trello.findZendeskTicketURL = function (card) {
     if (attachment.url.match(/govuk.zendesk.com/))
       return attachment.url;
   }
-
-  return '-';
+  return this.EMPTY_VALUE;
 };
 
 Trello.findPublishingURL = function (card) {
@@ -48,8 +48,7 @@ Trello.findPublishingURL = function (card) {
     if (attachment.url.match(/publishing.service.gov.uk/))
       return attachment.url;
   }
-
-  return '-';
+  return this.EMPTY_VALUE;
 };
 
 Trello.totalDaysInCurrentColumn = function (card, actions) {
@@ -65,8 +64,7 @@ Trello.totalDaysInCurrentColumn = function (card, actions) {
       }
     }
   }
-
-  return '-';
+  return this.EMPTY_VALUE;
 };
 
 Trello.findLabels = function (card) {

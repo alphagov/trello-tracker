@@ -1,7 +1,7 @@
 describe("SpreadSheet", function () {
 
   describe("#getRows", function () {
-    it("Gets all the rows in a worksheet, including the header", function () {
+    it("return all the rows in a worksheet, including the header", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1', 'header2']);
       var rows = [
@@ -9,12 +9,17 @@ describe("SpreadSheet", function () {
         ['3', '4']
       ];
       spreadSheet.addRows(rows);
-      expect(spreadSheet.getRows().length).toEqual(3)
-    })
+
+      expect(spreadSheet.getRows()).toEqual([
+        ['header1', 'header2'],
+        ['1', '2'],
+        ['3', '4']
+      ]);
+    });
   });
 
   describe("#getRow", function () {
-    it("Gets a specific row in the spreadsheet", function () {
+    it("return a row provided its index", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1', 'header2']);
       var rows = [
@@ -22,22 +27,23 @@ describe("SpreadSheet", function () {
         ['3', '4']
       ];
       spreadSheet.addRows(rows);
-      expect(spreadSheet.getRow(2)).toEqual(['3', '4'])
 
+      expect(spreadSheet.getRow(2)).toEqual(['3', '4']);
     });
-  })
+  });
 
   describe("#addHeader", function () {
-    it("Add header to the first row of the spreadsheet", function () {
+    it("add a header", function () {
       var spreadSheet = new SpreadSheet('a title');
       var header = ['value1', 'value2', 'value3'];
       spreadSheet.addHeader(header);
-      expect(spreadSheet.getRow(0)).toEqual(header)
+
+      expect(spreadSheet.getRow(0)).toEqual(header);
     });
   });
 
   describe("#addRows", function () {
-    it("Add rows to the worksheet", function () {
+    it("add rows to the spread sheet", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1', 'header2']);
       var rows = [
@@ -45,6 +51,7 @@ describe("SpreadSheet", function () {
         ['3', '4']
       ];
       spreadSheet.addRows(rows);
+
       expect(spreadSheet.getRow(1)).toEqual(['1', '2']);
       expect(spreadSheet.getRow(2)).toEqual(['3', '4']);
     });
@@ -52,18 +59,7 @@ describe("SpreadSheet", function () {
 
 
   describe("#export", function () {
-    it("Saves a new file", function () {
-      var spreadSheet = new SpreadSheet('a title');
-      spreadSheet.addHeader(['header1']);
-      spreadSheet.addRows(['row1']);
-
-      spyOn(window, "saveAs");
-      spreadSheet.export();
-
-      expect(window.saveAs).toHaveBeenCalled();
-    });
-
-    it("Saves a file with the board title as the file name", function () {
+    it("saves a file with the board title as the file name", function () {
       var spreadSheet = new SpreadSheet("A board title");
       spreadSheet.addHeader(['header1']);
       spreadSheet.addRows(['row1']);
@@ -71,10 +67,11 @@ describe("SpreadSheet", function () {
       spyOn(window, "saveAs");
       spreadSheet.export();
 
+      expect(window.saveAs).toHaveBeenCalled();
       expect(window.saveAs.calls.first().args[1]).toMatch("A board title.xlsx");
     });
 
-    it("Saves a file with the contents of the rows", function () {
+    it("saves a file with the contents of the rows", function () {
       var spreadSheet = new SpreadSheet('a title');
       spreadSheet.addHeader(['header1']);
       spreadSheet.addRows(['row1']);
