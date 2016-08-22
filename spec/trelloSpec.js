@@ -4,10 +4,9 @@ describe("Trello", function () {
     it("requests cards for the current Trello board", function () {
       var deferred = $.Deferred();
       deferred.resolve({});
-
       spyOn($, 'ajax').and.returnValue(deferred.promise());
-      spyOn(Trello, 'currentBrowserLocation').and.returnValue('/b/the_board_id/the_board_name');
 
+      Trello.setBoardURL('/b/the_board_id/the_board_name');
       Trello.getAllCards(function (data) {
         //noop
       });
@@ -144,6 +143,13 @@ describe("Trello", function () {
 
       var result = Trello.findLabels(card);
       expect(result).toEqual(['name1', 'name2']);
+    });
+  });
+
+  describe("#setBoardUrl", function () {
+    it("shows how long the card has had it's current status", function () {
+      Trello.setBoardURL('the-board-url');
+      expect(Trello.getBoardUrl()).toEqual('the-board-url');
     });
   });
 });

@@ -1,5 +1,13 @@
 var Trello = {};
 
+Trello.setBoardURL = function (url) {
+  this.boardUrl = url;
+};
+
+Trello.getBoardUrl= function() {
+  return this.boardUrl;
+};
+
 Trello.getAllCards = function (callback) {
   var boardId = this._getBoardId();
   var apiURL = "https://trello.com/1/boards/" + boardId + "?lists=open&cards=open&card_attachments=true&actions_limit=1000&actions=updateCard:idList&desc%2Cdue%2Clabels%2Cname%2CshortUrl%2CshortLink&desc%2CdescData%2Curl&fields=name%2CshortLink%2CshortUrl%2Curl%2Cdesc";
@@ -10,11 +18,7 @@ Trello.getAllCards = function (callback) {
 };
 
 Trello._getBoardId = function () {
-  return this.currentBrowserLocation().split('/')[2];
-};
-
-Trello.currentBrowserLocation = function () {
-  return window.location.pathname;
+  return this.boardUrl.split('/')[2];
 };
 
 Trello.findZendeskTicketID = function (card) {

@@ -1,6 +1,7 @@
 var Factcheck = {};
 
-Factcheck.toSpreadSheet = function () {
+Factcheck.toSpreadSheet = function (boardUrl) {
+  Trello.setBoardURL(boardUrl)
   Trello.getAllCards($.proxy(function (cards, boardName, actions) {
     var spreadSheet = this.process(cards, boardName, actions);
 

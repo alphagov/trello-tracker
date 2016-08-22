@@ -4,7 +4,7 @@ describe("Factcheck", function () {
     it("request all cards from Trello", function () {
       spyOn(Trello, 'getAllCards');
 
-      Factcheck.toSpreadSheet();
+      Factcheck.toSpreadSheet('the-board-url');
       expect(Trello.getAllCards).toHaveBeenCalled();
     });
 
