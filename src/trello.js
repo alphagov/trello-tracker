@@ -15,7 +15,7 @@ Trello.getAllCards = function (callback) {
   var apiURL = "https://trello.com/1/boards/" + boardId + "?lists=open&cards=open&card_attachments=true&actions_limit=1000&actions=updateCard:idList&desc%2Cdue%2Clabels%2Cname%2CshortUrl%2CshortLink&desc%2CdescData%2Curl&fields=name%2CshortLink%2CshortUrl%2Curl%2Cdesc";
 
   $.ajax(apiURL).done(function (data) {
-    callback(data.cards, data.name, data.actions);
+    callback(data.cards, data.name, data.actions, data.lists);
   });
 };
 
@@ -47,6 +47,16 @@ Trello.findPublishingURL = function (card) {
     var attachment = card.attachments[i];
     if (attachment.url.match(/publishing.service.gov.uk/))
       return attachment.url;
+  }
+  return this.EMPTY_VALUE;
+};
+
+Trello.findColumnName = function (card, lists) {
+  for (var i = 0; i < lists.length; i++) {
+    var list = lists[i];
+    if (card.idList === list.id) {
+      return list.name;
+    }
   }
   return this.EMPTY_VALUE;
 };

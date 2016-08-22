@@ -42,7 +42,7 @@ describe("Trello", function () {
       deferred.resolve(json);
 
       var cards;
-      Trello.getAllCards(function (allCards, boardName) {
+      Trello.getAllCards(function (allCards, boardName, allActions, lists) {
         cards = allCards;
       });
 
@@ -60,11 +60,30 @@ describe("Trello", function () {
       deferred.resolve(json);
 
       var actions;
-      Trello.getAllCards(function (allCards, boardName, allActions) {
+      Trello.getAllCards(function (allCards, boardName, allActions, lists) {
         actions = allActions;
       });
 
       expect(actions).toEqual(['action1', 'action2']);
+    });
+
+    it("return the lists as a callback parameter", function () {
+      var deferred = $.Deferred();
+      var json = {
+        name: '',
+        cards: [],
+        actions: [],
+        lists: ['list1', 'list2']
+      };
+      spyOn($, 'ajax').and.returnValue(deferred.promise());
+      deferred.resolve(json);
+
+      var lists;
+      Trello.getAllCards(function (allCards, boardName, allActions, allLists) {
+        lists = allLists;
+      });
+
+      expect(lists).toEqual(['list1', 'list2']);
     });
   });
 
@@ -143,6 +162,28 @@ describe("Trello", function () {
 
       var result = Trello.totalDaysInCurrentColumn(card, actions);
       expect(result).toEqual(11);
+    });
+  });
+
+  describe("#findColumnName", function () {
+    it("return the column name", function () {
+      card = {
+        "id": "a-car-id",
+        "idList": "the_list_id1"
+      };
+      lists = [
+        {
+          id: 'the_list_id1',
+          name: 'List One'
+        },
+        {
+          id: 'the_list_id_2',
+          name: 'List Two'
+        }
+      ];
+      var result = Trello.findColumnName(card, lists);
+
+      expect(result).toEqual('List One');
     });
   });
 
