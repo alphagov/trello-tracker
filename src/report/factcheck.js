@@ -16,7 +16,6 @@ Factcheck.process = function (cards, boardName, actions) {
     'Zendesk ID', 'Zendesk link', 'Departments/Agency',
     'Status Days', 'Publishing URL'
   ]);
-
   var rows = this._doParseRows(cards, actions);
   spreadSheet.addRows(rows);
 

@@ -1,12 +1,3 @@
-Export for Trello
-============
-
-Chrome extension to export data from Trello.
-
-Install Published Version
--------------------------
-Grab it from the [Chrome Web Store](https://chrome.google.com/webstore/detail/trelloexport/nhdelomnagopgaealggpgojkhcafhnin?hl=en).
-
 
 Install Development Version
 ---------------------------
@@ -19,15 +10,6 @@ Install Development Version
 
 Usage
 -----
-1. From a board, click on the board title
-2. Click on Share, print, and export...
-3. Click on Export Excel
+1. From a board, click on the Chrome Extension
+2. Click on the report you want to download
 
-Credit
-------
-Inspired by some non-functioning code I found hiding in [TrelloScrum](https://github.com/Q42/TrelloScrum/).
-
-
-Notes
------
-Watch out for that xlsx.js license from Microsoft.

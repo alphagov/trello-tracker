@@ -1,8 +1,13 @@
 $(document).ready(function () {
 
   this.run = function () {
+    this.initElements();
     this.bindCurrentBoardEventListener();
     this.bindFactcheckReportEventListener();
+  };
+
+  this.initElements = function () {
+    this.$factcheckLink = $('li.factcheck');
   };
 
   this.bindCurrentBoardEventListener = function () {
@@ -14,7 +19,7 @@ $(document).ready(function () {
   };
 
   this.bindFactcheckReportEventListener = function () {
-    $('li.factcheck').click($.proxy(this.runFactcheckReport, this));
+    this.$factcheckLink.click($.proxy(this.runFactcheckReport, this));
   };
 
   this.runFactcheckReport = function () {
