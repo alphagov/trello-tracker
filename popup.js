@@ -3,11 +3,11 @@ $(document).ready(function () {
   this.run = function () {
     this.initElements();
     this.bindCurrentBoardEventListener();
-    this.bindFactcheckReportEventListener();
+    this.bindAllCardsReportEventListener();
   };
 
   this.initElements = function () {
-    this.$factcheckLink = $('li.factcheck');
+    this.$allCardsLink = $('li.all-cards');
   };
 
   this.bindCurrentBoardEventListener = function () {
@@ -18,12 +18,12 @@ $(document).ready(function () {
     });
   };
 
-  this.bindFactcheckReportEventListener = function () {
-    this.$factcheckLink.click($.proxy(this.runFactcheckReport, this));
+  this.bindAllCardsReportEventListener = function () {
+    this.$allCardsLink.click($.proxy(this.runAllCardsReport, this));
   };
 
-  this.runFactcheckReport = function () {
-    Factcheck.toSpreadSheet(this.currentTab.url);
+  this.runAllCardsReport = function () {
+    AllCards.toSpreadSheet(this.currentTab.url);
   };
 
   this.run();

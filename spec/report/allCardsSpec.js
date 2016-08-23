@@ -1,23 +1,23 @@
-describe("Factcheck", function () {
+describe("AllCards", function () {
 
   describe("#toSpreadSheet", function () {
     it("exports the cards into an spreadSheet", function () {
       spyOn(Trello, 'getAllCards');
 
-      Factcheck.toSpreadSheet('the-board-url');
+      AllCards.toSpreadSheet('the-board-url');
       expect(Trello.getAllCards).toHaveBeenCalled();
     });
   });
 
   describe("#process", function () {
     it("returns a spreadsheet with a row per card", function () {
-      var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+      var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
 
       expect(spreadSheet.getRows().length).toEqual(3);
     });
 
     it("returns a spreadsheet with a a header", function () {
-      var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+      var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
 
       var header = spreadSheet.getRow(0);
       expect(header).toBeDefined();
@@ -25,7 +25,7 @@ describe("Factcheck", function () {
 
     describe("row content", function () {
       it("has a name", function () {
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[0]).toEqual('Title');
 
@@ -34,7 +34,7 @@ describe("Factcheck", function () {
       });
 
       it("has a description", function () {
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[1]).toEqual('Description');
 
@@ -43,7 +43,7 @@ describe("Factcheck", function () {
       });
 
       it("has a card id", function () {
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[2]).toEqual('Card ID');
 
@@ -52,7 +52,7 @@ describe("Factcheck", function () {
       });
 
       it("has a link to the card", function () {
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[3]).toEqual('Card URL');
 
@@ -62,7 +62,7 @@ describe("Factcheck", function () {
 
       it("has the list name", function () {
         spyOn(Trello, 'findColumnName').and.returnValue('expected-column-name');
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[4]).toEqual('Status');
 
@@ -72,7 +72,7 @@ describe("Factcheck", function () {
 
       it("has a zendesk id", function () {
         spyOn(Trello, 'findZendeskTicketID').and.returnValue('expected-id');
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[5]).toEqual('Zendesk ID');
 
@@ -82,7 +82,7 @@ describe("Factcheck", function () {
 
       it("has a link to the zendesk ticket", function () {
         spyOn(Trello, 'findZendeskTicketURL').and.returnValue('expected-url');
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[6]).toEqual('Zendesk link');
 
@@ -92,7 +92,7 @@ describe("Factcheck", function () {
 
       it("has the card labels", function () {
         spyOn(Trello, 'findLabels').and.returnValue(['label1', 'label2']);
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[7]).toEqual('Departments/Agency');
 
@@ -102,7 +102,7 @@ describe("Factcheck", function () {
 
       it("has the days in the column", function () {
         spyOn(Trello, 'totalDaysInCurrentColumn').and.returnValue(99);
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', ONE_LIST_TWO_CARDS.actions, []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', ONE_LIST_TWO_CARDS.actions, []);
         var header = spreadSheet.getRow(0);
         expect(header[8]).toEqual('Status Days');
 
@@ -112,7 +112,7 @@ describe("Factcheck", function () {
 
       it("has a link to the publisher preview link", function () {
         spyOn(Trello, 'findPublishingURL').and.returnValue('expected-url');
-        var spreadSheet = Factcheck.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
+        var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', [], []);
         var header = spreadSheet.getRow(0);
         expect(header[9]).toEqual('Publishing URL');
 

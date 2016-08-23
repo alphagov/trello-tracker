@@ -1,6 +1,6 @@
-var Factcheck = {};
+var AllCards = {};
 
-Factcheck.toSpreadSheet = function (boardUrl) {
+AllCards.toSpreadSheet = function (boardUrl) {
   Trello.setBoardURL(boardUrl)
   Trello.getAllCards($.proxy(function (cards, boardName, actions, lists) {
     var spreadSheet = this.process(cards, boardName, actions, lists);
@@ -9,7 +9,7 @@ Factcheck.toSpreadSheet = function (boardUrl) {
   }, this));
 };
 
-Factcheck.process = function (cards, boardName, actions, lists) {
+AllCards.process = function (cards, boardName, actions, lists) {
   var spreadSheet = new SpreadSheet(boardName);
   spreadSheet.addHeader([
     'Title', 'Description', 'Card ID', 'Card URL', 'Status',
@@ -22,7 +22,7 @@ Factcheck.process = function (cards, boardName, actions, lists) {
   return spreadSheet;
 };
 
-Factcheck._doParseRows = function (cards, actions, lists) {
+AllCards._doParseRows = function (cards, actions, lists) {
   var rows = $.map(cards, function (card) {
     return [[
       card.name,
