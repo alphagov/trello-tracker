@@ -88,7 +88,7 @@ ONE_LIST_TWO_CARDS = {
       "idLabels": [],
       "name": "Card One",
       "pos": 65535,
-      "shortLink": "shV841qQ",
+      "shortLink": "the-short-link",
       "badges": {
         "votes": 0,
         "viewingMemberVoted": false,
