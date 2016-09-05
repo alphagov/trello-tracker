@@ -27,7 +27,7 @@ AllCards._doParseRows = function (cards, actions, lists) {
     return [[
       card.name,
       card.desc,
-      card.shortLink,
+      '#' + card.idShort,
       card.shortUrl,
       Trello.findColumnName(card, lists),
       Trello.findZendeskTicketID(card),

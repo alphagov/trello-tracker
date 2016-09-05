@@ -48,7 +48,7 @@ describe("AllCards", function () {
         expect(header[2]).toEqual('Card ID');
 
         var row = spreadSheet.getRow(1);
-        expect(row[2]).toEqual('the-short-link');
+        expect(row[2]).toEqual('#999');
       });
 
       it("has a link to the card", function () {

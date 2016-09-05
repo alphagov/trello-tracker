@@ -84,7 +84,7 @@ ONE_LIST_TWO_CARDS = {
       "idAttachmentCover": null,
       "idList": "57ab3d0f17e5767d77da48bc",
       "idBoard": "57ab3cf8aa51012f89e3d76f",
-      "idShort": 1,
+      "idShort": 999,
       "idLabels": [],
       "name": "Card One",
       "pos": 65535,
