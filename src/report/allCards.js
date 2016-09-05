@@ -14,7 +14,7 @@ AllCards.process = function (cards, boardName, actions, lists) {
   spreadSheet.addHeader([
     'Title', 'Description', 'Card ID', 'Card URL', 'Status',
     'Zendesk ID', 'Zendesk link', 'Departments/Agency',
-    'Status Days', 'Publishing URL'
+    'How long?', 'Publishing URL'
   ]);
   var rows = this._doParseRows(cards, actions, lists);
   spreadSheet.addRows(rows);

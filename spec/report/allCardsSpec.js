@@ -104,7 +104,7 @@ describe("AllCards", function () {
         spyOn(Trello, 'totalDaysInCurrentColumn').and.returnValue(99);
         var spreadSheet = AllCards.process(ONE_LIST_TWO_CARDS.cards, 'List Name', ONE_LIST_TWO_CARDS.actions, []);
         var header = spreadSheet.getRow(0);
-        expect(header[8]).toEqual('Status Days');
+        expect(header[8]).toEqual('How long?');
 
         var row = spreadSheet.getRow(2);
         expect(row[8]).toEqual(99);
