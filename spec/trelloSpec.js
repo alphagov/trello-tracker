@@ -157,11 +157,9 @@ describe("Trello", function () {
           "date": "2016-08-01T09:33:30.800Z"
         }
       ];
-      var today = moment('2016-08-13').toDate();
-      jasmine.clock().mockDate(today);
 
       var result = Trello.totalDaysInCurrentColumn(card, actions);
-      expect(result).toEqual(11);
+      expect(result).toEqual("=DATEDIF(DATE(2016,8 ,1 ), TODAY(), \"D\")");
     });
   });
 

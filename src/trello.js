@@ -67,10 +67,12 @@ Trello.totalDaysInCurrentColumn = function (card, actions) {
         actionCardId = action.data.card.id;
     if (actionCardId === card.id) {
       if (action.data.listAfter) {
-        var today = moment();
-        var statusDate = moment(action.date);
+        var date = new Date(Date.parse(action.date));
+        var month = date.getUTCMonth() + 1;
+        var day = date.getUTCDate();
+        var year = date.getUTCFullYear();
 
-        return today.diff(statusDate, "days");
+        return "=DATEDIF(DATE(" + year + "," + month + " ," + day + " ), TODAY(), \"D\")"
       }
     }
   }
